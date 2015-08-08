@@ -1,6 +1,7 @@
 package com.boboeye.luandun.base;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +15,24 @@ import com.boboeye.luandun.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
+import de.greenrobot.event.Subscribe;
+
 /**
- * Created by libo_591 on 15/7/25.
+ * need override methods:
+ * requestPage
+ * getItemView
  */
 public class BaseListAdapter extends BaseAdapter {
+    private static final String TAG ="BaseListAdapter";
+    //===========must implements===============
+    public void requestPage(int index,int countPerPage){
+
+    }
+    public View getItemView(int position, View convertView, ViewGroup parent){
+        return null;
+    }
+    //===========must implements===============
     public static final int FOOTERSTATE_LOADING=0;
     public static final int FOOTERSTATE_ERROR  =1;
     public static final int FOOTERSTATE_LOADED =2;
@@ -25,7 +40,7 @@ public class BaseListAdapter extends BaseAdapter {
 
     private int mState = FOOTERSTATE_LOADING;
     protected Context mContext;
-    private List mDatas = new ArrayList();
+    protected List mDatas = new ArrayList();
     /** 当前所展示的页的索引 */
     private int mPageIndex   = -1;
     private int countPerPage = 15;
@@ -37,15 +52,17 @@ public class BaseListAdapter extends BaseAdapter {
     }
 
     private void initData() {
-        LuanApplication.getInst().getBus().register(this);
+        EventBus.getDefault().register(this);
         refresh();
     }
-
-    public void onEvent(BaseEvent baseEvent){
+    @Subscribe
+    public void onEventMainThread(BaseEvent baseEvent){
         if(baseEvent.getType()==BaseEvent.TYPE_BASELIST){
             int state = (Integer)baseEvent.getEventData().get(0);
-            if("1".equals(state)){
-                addDatas(baseEvent.getEventData());
+            if(state==1){
+                List<BaseModel> models = (List<BaseModel>)baseEvent.getEventData().get(1);
+                Log.d(TAG,"获取的数据大小:>"+ models.size());
+                addDatas(models);
                 if(mPageIndex==0&&mDatas.size()<countPerPage){
                     mState = FOOTERSTATE_LESSTHANONEPAGE;
                 }else{
@@ -81,10 +98,6 @@ public class BaseListAdapter extends BaseAdapter {
         mPageIndex=0;
         mDatas.clear();
         requestPage(mPageIndex, countPerPage);
-    }
-
-    public void requestPage(int index,int countPerPage){
-
     }
 
     public void requestNextPage(){
@@ -137,10 +150,6 @@ public class BaseListAdapter extends BaseAdapter {
         return getItemView(position,convertView,parent);
     }
 
-    public View getItemView(int position, View convertView, ViewGroup parent){
-        return null;
-    }
-
     public int getState(){
         return mState;
     }
@@ -151,5 +160,9 @@ public class BaseListAdapter extends BaseAdapter {
 
     public View getFooterView(){
         return mFooterView;
+    }
+
+    public int getDataSize(){
+        return mDatas.size();
     }
 }

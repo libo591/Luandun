@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.boboeye.luandun.LuanApplication;
@@ -14,24 +15,16 @@ import com.boboeye.luandun.LuanApplication;
 import java.util.List;
 
 /**
- * Created by libo_591 on 15/7/25.
+ * need implements methods:
+ * initViews
+ * initDatas
+ * getContentLayout
+ * getListView
+ * getAdapter
+ *
  */
 public class BaseListFragment extends BaseFragment implements AbsListView.OnScrollListener,SwipeRefreshLayout.OnRefreshListener {
-    private BaseListAdapter mAdapter;
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(getContentLayout(),null,false);
-        ListView listview = (ListView) view.findViewById(getListView());
-        mAdapter = getAdapter();
-        listview.setAdapter(mAdapter);
-        return view;
-    }
-
-    public int getContentLayout(){
-        return 0;
-    }
-
+    //=============must implements=============
     public int getListView(){
         return 0;
     }
@@ -39,6 +32,34 @@ public class BaseListFragment extends BaseFragment implements AbsListView.OnScro
     public BaseListAdapter getAdapter(){
         return null;
     }
+    //=============must implements=============
+
+    //=============option implements=============
+    public AdapterView.OnItemClickListener getOnitemClickListener(){
+        return null;
+    }
+    public AdapterView.OnItemLongClickListener getOnitemLongClickListener(){return null;}
+    //=============option implements=============
+
+    protected BaseListAdapter mAdapter;
+    protected ListView mListView;
+
+    @Override
+    public void initViews(View view) {
+        mListView = (ListView) view.findViewById(getListView());
+        mAdapter = getAdapter();
+        mListView.setAdapter(mAdapter);
+        AdapterView.OnItemClickListener itemClickLis = getOnitemClickListener();
+        if(itemClickLis!=null) {
+            mListView.setOnItemClickListener(itemClickLis);
+        }
+        AdapterView.OnItemLongClickListener itemLongClick = getOnitemLongClickListener();
+        if(itemLongClick!=null){
+            mListView.setOnItemLongClickListener(itemLongClick);
+        }
+    }
+
+
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {

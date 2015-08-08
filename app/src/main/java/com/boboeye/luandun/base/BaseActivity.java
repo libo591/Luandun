@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.boboeye.luandun.AppConfig;
 import com.boboeye.luandun.R;
 
 public class BaseActivity extends ActionBarActivity {
@@ -12,6 +13,7 @@ public class BaseActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppConfig.getInst().setContext(this);
         initLayout();
         initViews();
         initData();

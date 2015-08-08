@@ -11,6 +11,8 @@ import android.widget.TabHost;
 
 import com.boboeye.luandun.R;
 import com.boboeye.luandun.base.BaseActivity;
+import com.boboeye.luandun.fragments.DiscoverFragment;
+import com.boboeye.luandun.fragments.HomeTabContentFragment;
 import com.boboeye.luandun.proxy.DrawerLayoutProxy;
 import com.boboeye.luandun.view.HomeFragmentTabHost;
 
@@ -34,8 +36,8 @@ public class HomeActivity extends BaseActivity {
         mTabHost.setup(this, getSupportFragmentManager(), R.id.home_tabrealcontent);
         String tab1 = getResources().getString(R.string.home_tabhost_often);
         String tab2 = getResources().getString(R.string.home_tabhost_discover);
-        mTabHost.addTab(mTabHost.newTabSpec(tab1).setIndicator(tab1), null, null);
-        mTabHost.addTab(mTabHost.newTabSpec(tab2).setIndicator(tab2),null,null);
+        mTabHost.addTab(mTabHost.newTabSpec(tab1).setIndicator(tab1), HomeTabContentFragment.class, null);
+        mTabHost.addTab(mTabHost.newTabSpec(tab2).setIndicator(tab2), DiscoverFragment.class,null);
     }
 
     @Override

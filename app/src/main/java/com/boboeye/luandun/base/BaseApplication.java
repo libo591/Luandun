@@ -1,22 +1,19 @@
 package com.boboeye.luandun.base;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 
-import de.greenrobot.event.EventBus;
 
 /**
  * Created by libo_591 on 15/7/25.
  */
 public class BaseApplication extends Application {
-    public EventBus getBus() {
-        return mBus;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
     }
-
-    public void setBus(EventBus mBus) {
-        this.mBus = mBus;
-    }
-
-    private EventBus mBus;
-
 
 }

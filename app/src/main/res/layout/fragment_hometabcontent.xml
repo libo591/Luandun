@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <com.boboeye.luandun.view.PagerSlidingTabStrip
+        android:id="@+id/hometabcontent_tabstrip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:allowWidthFull="true"
+        app:slidingBlock="@drawable/image_sliding_block"></com.boboeye.luandun.view.PagerSlidingTabStrip>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/hometabcontent_viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+</LinearLayout>

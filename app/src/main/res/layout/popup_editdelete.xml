@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/netmanage_ll" xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="wrap_content"
+    android:layout_height="wrap_content" android:layout_margin="8dp"
+    android:background="@color/black_overlay">
+    <Button
+        android:id="@+id/netmanage_itemedit"
+        android:text="编辑"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/netmanage_itemdelete"
+        android:text="删除"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

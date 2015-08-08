@@ -7,6 +7,9 @@ import java.util.List;
  */
 public class BaseEvent {
     public static final int TYPE_BASELIST=0;
+    public static final int TYPE_EDIT    =1;
+    public static final int TYPE_DELETE  =2;
+    public static final int TYPE_ADD     =3;
 
     private int type=-1;
     private List eventData;

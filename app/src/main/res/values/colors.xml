@@ -1,4 +1,10 @@
 <resources>
+    <color name="test1">#3300FF</color>
+    <color name="test2">#FFFF00</color>
+    <color name="test3">#00ffff</color>
+    <color name="test4">#ff00ff</color>
+    <color name="test5">#999999</color>
+
 
     <color name="black_overlay">#66000000</color>
 

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content" android:layout_margin="8dp" android:background="@color/black_overlay">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/social_item_from"
+            android:text="新浪微博"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="@dimen/normal_h_margin"/>
+        <TextView
+            android:id="@+id/social_item_time"
+            android:text="1999-09-09 12:53"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/normal_h_margin"/>
+    </RelativeLayout>
+    <View android:layout_height="1dp" android:layout_width="match_parent" android:background="#0000FF" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/social_item_person"
+            android:text="和尚请来得逗比"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/normal_h_margin"/>
+    </LinearLayout>
+    <View android:layout_height="1dp" android:layout_width="match_parent" android:background="#0000FF" />
+    <TextView
+        android:id="@+id/social_item_message"
+        android:text="征文征文征文征文征文征文征文征文征文"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_margin="@dimen/normal_h_margin"/>
+    <View android:layout_height="1dp" android:layout_width="match_parent" android:background="#0000FF" />
+    <LinearLayout
+        android:id="@+id/social_item_imagelist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </LinearLayout>
+</LinearLayout>
