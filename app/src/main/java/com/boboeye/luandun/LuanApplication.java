@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 import com.boboeye.luandun.base.BaseApplication;
+import com.boboeye.luandun.base.BaseUncaughtExceptionHandler;
 
 /**
  * Created by libo_591 on 15/7/25.
@@ -15,6 +16,8 @@ public class LuanApplication extends BaseApplication{
     @Override
     public void onCreate() {
         super.onCreate();
+        //BaseUncaughtExceptionHandler baseun = new BaseUncaughtExceptionHandler();
+        //Thread.setDefaultUncaughtExceptionHandler(baseun);
     }
 
 }

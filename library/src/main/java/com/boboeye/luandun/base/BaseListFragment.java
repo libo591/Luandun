@@ -3,6 +3,7 @@ package com.boboeye.luandun.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +11,10 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.boboeye.luandun.LuanApplication;
 
 import java.util.List;
+
+import de.greenrobot.event.Subscribe;
 
 /**
  * need implements methods:
@@ -24,6 +26,8 @@ import java.util.List;
  *
  */
 public class BaseListFragment extends BaseFragment implements AbsListView.OnScrollListener,SwipeRefreshLayout.OnRefreshListener {
+    private static final String TAG = "BaseListFragment";
+
     //=============must implements=============
     public int getListView(){
         return 0;
@@ -46,9 +50,13 @@ public class BaseListFragment extends BaseFragment implements AbsListView.OnScro
 
     @Override
     public void initViews(View view) {
-        mListView = (ListView) view.findViewById(getListView());
-        mAdapter = getAdapter();
-        mListView.setAdapter(mAdapter);
+        if(mListView==null){
+            mListView = (ListView) view.findViewById(getListView());
+        }
+        if(mAdapter==null){
+            mAdapter = getAdapter();
+            mListView.setAdapter(mAdapter);
+        }
         AdapterView.OnItemClickListener itemClickLis = getOnitemClickListener();
         if(itemClickLis!=null) {
             mListView.setOnItemClickListener(itemClickLis);
@@ -59,7 +67,11 @@ public class BaseListFragment extends BaseFragment implements AbsListView.OnScro
         }
     }
 
-
+    @Override
+    public void initDatas() {
+        super.initDatas();
+        getController().requestPage();
+    }
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -77,7 +89,7 @@ public class BaseListFragment extends BaseFragment implements AbsListView.OnScro
         int position = view.getPositionForView(mAdapter.getFooterView());
         if(position==mAdapter.getCount()-1){isInEnd=true;}
 
-        mAdapter.requestNextPage();
+        getController().requestNextPage();
     }
 
     @Override
@@ -87,6 +99,19 @@ public class BaseListFragment extends BaseFragment implements AbsListView.OnScro
 
     @Override
     public void onRefresh() {
-        mAdapter.refresh();
+        mAdapter.clearData();
+        getController().refresh();
+    }
+
+    @Subscribe
+    public void onEventMainThread(BaseEvent baseEvent){
+        if(baseEvent.getType()==BaseEvent.TYPE_BASELIST){
+            int state = (Integer)baseEvent.getEventData().get(0);
+            List<BaseModel> models = (List<BaseModel>)baseEvent.getEventData().get(1);
+            Log.d(TAG, "获取的数据大小:>" + models.size());
+            mAdapter.addDatas(models);
+            mAdapter.setState(state);
+            mAdapter.notifyDataSetChanged();
+        }
     }
 }

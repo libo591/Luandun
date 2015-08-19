@@ -1,21 +1,23 @@
 package com.boboeye.luandun.model.impl;
 
+import android.graphics.Bitmap;
+
 import com.boboeye.luandun.base.BaseModel;
 
 /**
  * Created by libo_591 on 15/8/5.
  */
 public class NetModel extends BaseModel {
-    private String icon;
+    private Object icon;
     private String title;
     private String url;
     private int sort;
 
-    public String getIcon() {
+    public Object getIcon() {
         return icon;
     }
 
-    public void setIcon(String icon) {
+    public void setIcon(Object icon) {
         this.icon = icon;
     }
 

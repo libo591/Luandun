@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">library</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="loading">加载中......</string>
+    <string name="error">网络错误或其他错误</string>
+</resources>

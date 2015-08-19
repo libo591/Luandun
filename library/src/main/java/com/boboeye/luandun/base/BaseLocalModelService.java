@@ -1,7 +1,6 @@
 package com.boboeye.luandun.base;
 
 import com.boboeye.luandun.AppConfig;
-import com.boboeye.luandun.LuanApplication;
 
 import org.kymjs.kjframe.utils.FileUtils;
 
@@ -34,6 +33,7 @@ public class BaseLocalModelService {
     public String getUploadFilePath(){return getBaseFilePath();}
 
 
+    public int createData(BaseModel data){return 0;}
     public int createDataList(List<BaseModel> datas){return 0;}
     public int updateData(BaseModel data){return 0;}
     public int updateDataList(List<BaseModel> datas){return 0;}

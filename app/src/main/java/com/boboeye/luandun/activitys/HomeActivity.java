@@ -67,4 +67,5 @@ public class HomeActivity extends BaseActivity {
     public int getMenuLayout() {
         return R.menu.menu_home;
     }
+
 }

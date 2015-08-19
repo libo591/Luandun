@@ -1,11 +1,10 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 22
     buildToolsVersion "23.0.0 rc3"
 
     defaultConfig {
-        applicationId "com.boboeye.luandun"
         minSdkVersion 10
         targetSdkVersion 22
         versionCode 1
@@ -23,11 +22,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.android.support:support-v4:22.2.0'
-    compile 'com.jakewharton:butterknife:6.1.0'
     compile 'de.greenrobot:eventbus:3.0.0-beta1'
-    compile 'com.loopj.android:android-async-http:1.4.8'
-    compile 'com.jakewharton:disklrucache:2.0.2'
     compile files('libs/KJFrameForAndroid_v2.223.jar')
-    compile 'net.i2p.android.ext:floatingactionbutton:1.10.0'
-    compile project(':library')
 }

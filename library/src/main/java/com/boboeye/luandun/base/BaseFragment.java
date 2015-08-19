@@ -3,6 +3,7 @@ package com.boboeye.luandun.base;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +19,19 @@ public class BaseFragment extends Fragment implements BaseBuild {
     //=============must implements=============
 
     //=============option implements=============
+    public BaseController getController(){return null;}
     @Override
     public void initViews(View view) {}
 
     @Override
-    public void initDatas() {}
+    public void initDatas() {
+        BaseController _control = getController();
+        if(_control!=null) {
+            _control.registFragment(this);
+        }
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event){return false;}
     //=============option implements=============
 
 
@@ -36,6 +45,12 @@ public class BaseFragment extends Fragment implements BaseBuild {
     }
 
 
-
-
+    @Override
+    public void onDestroy() {
+        BaseController _control = getController();
+        if(_control!=null) {
+            _control.unregistFragment(this);
+        }
+        super.onDestroy();
+    }
 }

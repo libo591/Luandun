@@ -5,15 +5,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.boboeye.luandun.R;
 import com.boboeye.luandun.adapter.NetAdapter;
-import com.boboeye.luandun.base.BaseFragment;
+import com.boboeye.luandun.base.BaseController;
 import com.boboeye.luandun.base.BaseListAdapter;
 import com.boboeye.luandun.base.BaseListFragment;
 import com.boboeye.luandun.base.BasePopupManager;
 import com.boboeye.luandun.controller.NetController;
+import com.boboeye.luandun.event.NetEvent;
 import com.boboeye.luandun.model.impl.NetModel;
+
+import de.greenrobot.event.Subscribe;
 
 /**
  * Created by libo_591 on 15/8/2.
@@ -21,6 +25,10 @@ import com.boboeye.luandun.model.impl.NetModel;
 public class MyNetManageFragment extends BaseListFragment
         implements AdapterView.OnItemClickListener,
         AdapterView.OnItemLongClickListener,View.OnClickListener {
+    private static MyNetManageFragment _inst = new MyNetManageFragment();
+    public static MyNetManageFragment getInst(){
+        return _inst;
+    }
     private static final String TAG = "MyNetManageFragment";
     private int operPosition;
     private View operview;
@@ -32,7 +40,7 @@ public class MyNetManageFragment extends BaseListFragment
     private NetController mNetController=NetController.getInst();
     @Override
     public int getContentLayout() {
-        return R.layout.fragment_netmanage;
+        return R.layout.fragment_netmanage_1;
     }
 
     @Override
@@ -43,6 +51,11 @@ public class MyNetManageFragment extends BaseListFragment
     @Override
     public BaseListAdapter getAdapter() {
         return new NetAdapter(getActivity());
+    }
+
+    @Override
+    public BaseController getController() {
+        return NetController.getInst();
     }
 
     @Override
@@ -72,7 +85,10 @@ public class MyNetManageFragment extends BaseListFragment
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         //navigate to webactivity
-        Log.d(TAG, "itemclick--"+position);
+        Log.d(TAG, "goto browseweb fragment");
+        NetModel netModel = (NetModel) mAdapter.getItem(position);
+        BrowseWebfragment bwf = BrowseWebfragment.getInst(netModel.getUrl());
+        getFragmentManager().beginTransaction().add(R.id.netmanage_fragment, bwf).addToBackStack("browseweb").commit();
     }
 
     @Override
@@ -102,6 +118,19 @@ public class MyNetManageFragment extends BaseListFragment
             mNetController.edit(nm);
         }else if(viewid==R.id.netmodelview_cancel){
             BasePopupManager.removePop(modelView);
+        }
+    }
+
+    @Subscribe
+    public void onEventMainThread(NetEvent ne){
+        if(ne.getType()==NetEvent.TYPE_DELETE){
+            String msg = "删除成功";
+            Toast.makeText(this.getActivity(), msg, Toast.LENGTH_SHORT).show();
+            this.onRefresh();
+        }else if(ne.getType()==NetEvent.TYPE_EDIT){
+            String msg = "修改成功";
+            Toast.makeText(this.getActivity(), msg, Toast.LENGTH_SHORT).show();
+            this.onRefresh();
         }
     }
 }

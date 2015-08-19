@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.boboeye.luandun.AppConfig;
-import com.boboeye.luandun.LuanApplication;
 
 /**
  * Created by libo_591 on 15/8/3.

@@ -7,7 +7,9 @@ import android.widget.TextView;
 
 import com.boboeye.luandun.HomeTabContentViewPagerAdapter;
 import com.boboeye.luandun.R;
+import com.boboeye.luandun.base.BaseController;
 import com.boboeye.luandun.base.BaseFragment;
+import com.boboeye.luandun.controller.HomeController;
 import com.boboeye.luandun.view.PagerSlidingTabStrip;
 
 import butterknife.ButterKnife;
@@ -26,6 +28,7 @@ public class HomeTabContentFragment extends BaseFragment {
     public void initViews(View view) {
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.hometabcontent_viewPager);
         HomeTabContentViewPagerAdapter adapter = new HomeTabContentViewPagerAdapter(getChildFragmentManager());
+        viewPager.setOffscreenPageLimit(4);
         PagerSlidingTabStrip tabstrip = (PagerSlidingTabStrip) view.findViewById(R.id.hometabcontent_tabstrip);
         viewPager.setAdapter(adapter);
         tabstrip.setViewPager(viewPager);

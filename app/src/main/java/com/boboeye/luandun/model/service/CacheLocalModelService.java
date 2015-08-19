@@ -59,6 +59,40 @@ public class CacheLocalModelService extends BaseLocalModelService {
         }
         return cache;
     }
+
+    @Override
+    public int createData(BaseModel bm) {
+        DiskLruCache cache = getLruCache(getCreateFilePath());
+        DiskLruCache.Editor cacheeditor = null;
+        try {
+            DiskLruCache.Snapshot snapshot = cache.get(getCacheKey());
+            List<BaseModel> models = null;
+            if(snapshot==null){
+                models = new ArrayList<BaseModel>();
+                models.add(bm);
+            }else{
+                String jsonString = snapshot.getString(0);
+                Class clz = bm.getClass();
+                models = JSONArray.parseArray(jsonString, clz);
+                models.add(bm);
+            }
+            cacheeditor = cache.edit(getCacheKey());
+            cacheeditor.set(0, JSONArray.toJSONString(models));
+            cacheeditor.commit();
+        }catch(Exception e){
+            e.printStackTrace();
+            if(cacheeditor!=null){
+                try {
+                    cacheeditor.abort();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+            return 0;
+        }
+        return 1;
+    }
+
     public int createDataList(List<BaseModel> datas){
         if(datas==null||datas.size()<0){
             return 0;
@@ -90,12 +124,16 @@ public class CacheLocalModelService extends BaseLocalModelService {
         DiskLruCache.Editor cacheeditor = null;
         try {
             DiskLruCache.Snapshot snapshot = cache.get(getCacheKey());
+            if(snapshot==null){
+                return 0;
+            }
             String jsonString = snapshot.getString(0);
+            Log.d(TAG,"delData:"+jsonString);
             List<? extends BaseModel> models = JSONArray.parseArray(jsonString, bm.getClass());
             int size = models.size();
             for (int i = 0; i < size; i++) {
                 BaseModel model = models.get(i);
-                if (model.getId() == bm.getId()) {
+                if (model.getId().equals(bm.getId())) {
                     models.remove(i);
                     break;
                 }
@@ -104,6 +142,7 @@ public class CacheLocalModelService extends BaseLocalModelService {
             cacheeditor.set(0, JSONArray.toJSONString(models));
             cacheeditor.commit();
         }catch(Exception e){
+            e.printStackTrace();
             if(cacheeditor!=null){
                 try {
                     cacheeditor.abort();
@@ -135,12 +174,11 @@ public class CacheLocalModelService extends BaseLocalModelService {
         try {
             DiskLruCache.Snapshot cacheData = cache.get(getCacheKey());
             if(cacheData!=null){
-                Log.d(TAG,"referDatas:"+cacheData.getString(0));
-                modelList = JSONArray.parseArray(cacheData.getString(0), getModelClass());
+                String data = cacheData.getString(0);
+                Log.d(TAG,"referDatas:"+data);
+                modelList = JSONArray.parseArray(data, getModelClass());
             }else{
                 modelList = new ArrayList();
-                modelList.add(new NetModel());
-                modelList.add(new NetModel());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -149,17 +187,20 @@ public class CacheLocalModelService extends BaseLocalModelService {
     }
 
     public int updateData(BaseModel bm){
-        DiskLruCache cache = getLruCache(getDeleteFilePath());
+        DiskLruCache cache = getLruCache(getUpdateFilePath());
         DiskLruCache.Editor cacheeditor = null;
         try {
             DiskLruCache.Snapshot snapshot = cache.get(getCacheKey());
+            if(snapshot==null){
+                return 0;
+            }
             String jsonString = snapshot.getString(0);
             Class clz= bm.getClass();
             List<BaseModel> models = JSONArray.parseArray(jsonString,clz);
             int size = models.size();
             for (int i = 0; i < size; i++) {
                 BaseModel model = models.get(i);
-                if (model.getId() == bm.getId()) {
+                if (model.getId().equals(bm.getId())) {
                     models.set(i, bm);
                     break;
                 }
@@ -168,6 +209,7 @@ public class CacheLocalModelService extends BaseLocalModelService {
             cacheeditor.set(0, JSONArray.toJSONString(models));
             cacheeditor.commit();
         }catch(Exception e){
+            e.printStackTrace();
             if(cacheeditor!=null){
                 try {
                     cacheeditor.abort();
@@ -180,10 +222,13 @@ public class CacheLocalModelService extends BaseLocalModelService {
         return 1;
     }
     public int updateDataList(List<BaseModel> datas){
-        DiskLruCache cache = getLruCache(getDeleteFilePath());
+        DiskLruCache cache = getLruCache(getUpdateListFilePath());
         DiskLruCache.Editor editor = null;
         try {
             DiskLruCache.Snapshot snap = cache.get(getCacheKey());
+            if(snap==null){
+                return 0;
+            }
             editor = snap.edit();
             editor.set(0,JSONArray.toJSONString(datas));
             editor.commit();

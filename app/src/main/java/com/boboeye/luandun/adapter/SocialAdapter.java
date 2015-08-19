@@ -31,10 +31,6 @@ public class SocialAdapter extends BaseListAdapter {
         super(context);
     }
 
-    @Override
-    public void requestPage(int index, int countPerPage) {
-        SocialController.getController().requestPageData(index, countPerPage);
-    }
 
     @Override
     public View getItemView(int position, View convertView, ViewGroup parent) {

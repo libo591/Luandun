@@ -9,8 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.boboeye.luandun.LuanApplication;
-import com.boboeye.luandun.R;
+import com.boboeye.library.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +25,6 @@ import de.greenrobot.event.Subscribe;
 public class BaseListAdapter extends BaseAdapter {
     private static final String TAG ="BaseListAdapter";
     //===========must implements===============
-    public void requestPage(int index,int countPerPage){
-
-    }
     public View getItemView(int position, View convertView, ViewGroup parent){
         return null;
     }
@@ -40,46 +36,18 @@ public class BaseListAdapter extends BaseAdapter {
 
     private int mState = FOOTERSTATE_LOADING;
     protected Context mContext;
-    protected List mDatas = new ArrayList();
-    /** 当前所展示的页的索引 */
-    private int mPageIndex   = -1;
-    private int countPerPage = 15;
     private View mFooterView;
+    private List mDatas = new ArrayList();
 
     public BaseListAdapter(Context context){
         this.mContext = context;
-        initData();
-    }
-
-    private void initData() {
-        EventBus.getDefault().register(this);
-        refresh();
-    }
-    @Subscribe
-    public void onEventMainThread(BaseEvent baseEvent){
-        if(baseEvent.getType()==BaseEvent.TYPE_BASELIST){
-            int state = (Integer)baseEvent.getEventData().get(0);
-            if(state==1){
-                List<BaseModel> models = (List<BaseModel>)baseEvent.getEventData().get(1);
-                Log.d(TAG,"获取的数据大小:>"+ models.size());
-                addDatas(models);
-                if(mPageIndex==0&&mDatas.size()<countPerPage){
-                    mState = FOOTERSTATE_LESSTHANONEPAGE;
-                }else{
-                    mState = FOOTERSTATE_LOADED;
-                }
-            }else{
-                this.mState = FOOTERSTATE_ERROR;
-            }
-            notifyDataSetChanged();
-        }
     }
 
     public void addDatas(List data){
         mDatas.addAll(data);
         notifyDataSetChanged();
     }
-    public void addData(Object data){
+    public void addData(BaseModel data){
         mDatas.add(data);
         notifyDataSetChanged();
     }
@@ -92,16 +60,6 @@ public class BaseListAdapter extends BaseAdapter {
     public void clearData(){
         mDatas.clear();
         notifyDataSetChanged();
-    }
-
-    public void refresh(){
-        mPageIndex=0;
-        mDatas.clear();
-        requestPage(mPageIndex, countPerPage);
-    }
-
-    public void requestNextPage(){
-        requestPage(mPageIndex++, countPerPage);
     }
 
 

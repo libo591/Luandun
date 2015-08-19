@@ -2,6 +2,7 @@ package com.boboeye.luandun.adapter;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,21 +34,19 @@ public class NetAdapter extends BaseListAdapter {
     @Override
     public View getItemView(int position, View convertView, ViewGroup parent) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.netmanage_item, null);
-        if(getDataSize()>0) {
+        if(getDataSize()>0){
             NetModel nm = (NetModel) getItem(position);
             ImageView iconImage = (ImageView) view.findViewById(R.id.netitem_imageview);
             KJBitmap kb = new KJBitmap();
-            kb.display(iconImage, nm.getIcon());
+            if (nm.getIcon() instanceof String) {
+                kb.display(iconImage, nm.getIcon().toString());
+            } else {
+                iconImage.setImageBitmap((Bitmap) nm.getIcon());
+            }
             TextView title = (TextView) view.findViewById(R.id.netitem_title);
+            Log.d(TAG, "net list title=" + nm.getTitle());
             title.setText(nm.getTitle());
         }
         return view;
-    }
-
-    @Override
-    public void requestPage(int index, int countPerPage) {
-        Log.d(TAG,"requestPage,page:"+index+"-count:"+countPerPage);
-        NetController netController = new NetController();
-        netController.requestNetPage(index, countPerPage);
     }
 }

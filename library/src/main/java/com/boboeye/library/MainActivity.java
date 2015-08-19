@@ -1,43 +1,23 @@
-package com.boboeye.luandun.base;
+package com.boboeye.library;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.boboeye.luandun.AppConfig;
-import com.boboeye.luandun.R;
 
-public class BaseActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AppConfig.getInst().setContext(this);
-        initLayout();
-        initViews();
-        initData();
-    }
-
-    public void initLayout() {
-        int contentLayout = getContentLayout();
-        if(contentLayout>0){
-            setContentView(contentLayout);
-        }
-    }
-
-    public void initViews() {
-
-    }
-
-    public void initData(){
-
+        setContentView(R.layout.activity_main);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(getMenuLayout(), menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -55,10 +35,4 @@ public class BaseActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-    public int getContentLayout(){
-        return 0;
-    }
-    public int getMenuLayout(){return R.menu.menu_base;}
 }

@@ -1,28 +1,15 @@
 package com.boboeye.luandun.base;
 
 import android.os.AsyncTask;
-import android.util.Log;
 import android.util.SparseArray;
 
-import com.boboeye.luandun.event.NetEvent;
-import com.boboeye.luandun.model.impl.NetModel;
-import com.boboeye.luandun.model.service.impl.NetModelService;
-
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-
-import de.greenrobot.event.EventBus;
 
 /**
- * 所有controller的父类，子类必须重写getController，返回单例
+ * Created by libo_591 on 15/8/17.
  */
-public class BaseController {
-
-    public EventBus getBus(){return EventBus.getDefault();}
+public class BaseControllerAsynTaskProxy {
     private SparseArray<BaseControllerTask> mControllerTasks = new SparseArray<BaseControllerTask>();
-
     public void cancelAll(){
         if(mControllerTasks!=null){
             int size = mControllerTasks.size();
@@ -31,7 +18,7 @@ public class BaseController {
             }
         }
     }
-    private void cancelTask(int taskid){
+    public void cancelTask(int taskid){
         BaseControllerTask task = mControllerTasks.get(taskid);
         if(task!=null){
             task.cancel(true);
@@ -86,8 +73,14 @@ public class BaseController {
         @Override
         protected void onPostExecute(Object o) {
             try {
-                Method method = mController.getClass().getDeclaredMethod(methodNameCallBack, o.getClass());
-                method.invoke(mController,o);
+                if(o==null){
+                    Method method = mController.getClass().getDeclaredMethod(methodNameCallBack);
+                    method.invoke(mController);
+                }else{
+                    Method method = mController.getClass().getDeclaredMethod(methodNameCallBack, o.getClass());
+                    method.invoke(mController,o);
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
