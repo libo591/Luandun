@@ -1,6 +1,5 @@
 package com.boboeye.luandun.base;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.boboeye.luandun.AppConfig;
@@ -16,7 +15,7 @@ public class BaseInfoStore {
     public void put(String key,String value){
         SharedPreferences.Editor edit = mSharePreferences.edit();
         edit.putString(key,value);
-        edit.commit();
+        edit.apply();
     }
 
     public String get(String key,String def){
@@ -26,6 +25,6 @@ public class BaseInfoStore {
     public void remove(String key){
         SharedPreferences.Editor edit = mSharePreferences.edit();
         edit.remove(key);
-        edit.commit();
+        edit.apply();
     }
 }

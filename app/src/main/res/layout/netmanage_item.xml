@@ -1,18 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:background="@color/test5">
-    <ImageView
-        android:id="@+id/netitem_imageview"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_margin="8dp" android:visibility="gone"/>
+    android:background="@color/transparent">
     <TextView
         android:id="@+id/netitem_title"
-        android:text="标题"
+        style="@style/netlistitem"/>
+    <ImageView
+        android:id="@+id/netitem_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/browser"
+        android:layout_gravity="center_vertical|start" android:layout_marginLeft="8dp" android:scaleType="fitXY" />
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"/>
-</LinearLayout>
+        android:layout_height="match_parent" android:background="@color/transparent">
+        <ImageView
+            android:id="@+id/netitem_option"
+            style="@style/netlistitem_image"/>
+        <LinearLayout
+            android:id="@+id/netitem_optionbox"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" android:visibility="gone"
+            android:layout_toLeftOf="@id/netitem_option" android:background="?attr/menu_bg">
+            <TextView
+                android:id="@+id/netitem_edit"
+                android:text="@string/edit"
+                style="@style/menutextstyle"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:id="@+id/netitem_delete"
+                android:text="@string/delete"
+                style="@style/menutextstyle"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+    </RelativeLayout>
+</FrameLayout>

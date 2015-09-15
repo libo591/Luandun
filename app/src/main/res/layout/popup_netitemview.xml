@@ -1,30 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:id="@+id/netmodelview_ll" xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="wrap_content"
-    android:layout_height="wrap_content" android:layout_margin="8dp"
-    android:background="@color/black_overlay">
+<LinearLayout android:id="@+id/netmodelview_ll"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/day_colorPrimary"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <EditText
         android:id="@+id/netmodelview_title"
-        android:hint="标题"
-        android:layout_width="match_parent"
-        android:layout_height="48dp" />
+        android:hint="@string/title"
+        style="@style/netinfowindow_edittext"
+        />
     <EditText
         android:id="@+id/netmodelview_url"
-        android:hint="URL"
-        android:layout_width="match_parent"
-        android:layout_height="144dp" />
+        android:hint="@string/urltitle"
+        android:inputType="textUri"
+        style="@style/netinfowindow_edittext"
+        android:layout_height="144dp"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp" android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" android:layout_gravity="bottom">
         <Button
             android:id="@+id/netmodelview_edit"
-            android:text="确定"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:text="@string/sure"
+            style="@style/netinfowindow_button" />
         <Button
             android:id="@+id/netmodelview_cancel"
-            android:text="取消"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:text="@string/cancel"
+            style="@style/netinfowindow_button" />
     </LinearLayout>
 </LinearLayout>

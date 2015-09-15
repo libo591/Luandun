@@ -1,6 +1,5 @@
 package com.boboeye.luandun.socialopen;
 
-import android.content.SharedPreferences;
 
 import com.boboeye.luandun.base.BaseInfoStore;
 
@@ -14,8 +13,8 @@ import java.util.List;
  * Created by libo_591 on 15/8/3.
  */
 public class WeiBoController {
-    private final String APPKEY = "925317683";
-    private final String APPSECRET = "041e1b44a57b13ce1de961e930ca7566";
+    private final String APPKEY = "";
+    private final String APPSECRET = "";
     private final String weiboBaseUrl = "https://api.weibo.com";
     private final String OAUTH2URL = "/oauth2";
     private final String WEIBOURL = "/2/statuses/public_timeline.json";

@@ -10,18 +10,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.boboeye.luandun.R;
-import com.boboeye.luandun.base.BaseEvent;
 import com.boboeye.luandun.base.BaseListAdapter;
-import com.boboeye.luandun.controller.SocialController;
 import com.boboeye.luandun.model.impl.SocialMessage;
 
 import org.kymjs.kjframe.KJBitmap;
-import org.kymjs.kjframe.bitmap.ImageDisplayer;
 import org.kymjs.kjframe.utils.DensityUtils;
-
-import java.util.Date;
-
-import de.greenrobot.event.EventBus;
 
 /**
  * Created by libo_591 on 15/7/26.

@@ -1,6 +1,5 @@
 package com.boboeye.luandun.utils;
 
-import android.util.Base64;
 
 import org.kymjs.kjframe.utils.CipherUtils;
 

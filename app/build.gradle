@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.boboeye.luandun"
-        minSdkVersion 10
+        minSdkVersion 11
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -30,4 +30,5 @@ dependencies {
     compile files('libs/KJFrameForAndroid_v2.223.jar')
     compile 'net.i2p.android.ext:floatingactionbutton:1.10.0'
     compile project(':library')
+    androidTestCompile files('libs/robotium-solo-5.0.1.jar')
 }

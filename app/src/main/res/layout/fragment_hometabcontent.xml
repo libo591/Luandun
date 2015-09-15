@@ -7,8 +7,9 @@
         android:id="@+id/hometabcontent_tabstrip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?attr/window_bg"
         app:allowWidthFull="true"
-        app:slidingBlock="@drawable/image_sliding_block"></com.boboeye.luandun.view.PagerSlidingTabStrip>
+        app:slidingBlock="?attr/tab_block"></com.boboeye.luandun.view.PagerSlidingTabStrip>
     <android.support.v4.view.ViewPager
         android:id="@+id/hometabcontent_viewPager"
         android:layout_width="match_parent"

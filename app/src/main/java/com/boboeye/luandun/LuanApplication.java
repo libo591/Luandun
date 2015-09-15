@@ -1,11 +1,7 @@
 package com.boboeye.luandun;
 
-import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 
 import com.boboeye.luandun.base.BaseApplication;
-import com.boboeye.luandun.base.BaseUncaughtExceptionHandler;
 
 /**
  * Created by libo_591 on 15/7/25.

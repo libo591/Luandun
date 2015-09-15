@@ -1,21 +1,14 @@
 package com.boboeye.luandun.model.service;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.boboeye.luandun.base.BaseModel;
 import com.boboeye.luandun.base.BaseNetWorkModelService;
-import com.boboeye.luandun.utils.EncryptUtil;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
-import org.apache.http.Header;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

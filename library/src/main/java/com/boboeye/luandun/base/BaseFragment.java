@@ -3,6 +3,7 @@ package com.boboeye.luandun.base;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,10 @@ import android.view.ViewGroup;
 /**
  * Created by libo_591 on 15/7/25.
  */
-public class BaseFragment extends Fragment implements BaseBuild {
+public class BaseFragment extends Fragment {
+    private static final String TAG = "BaseFragment";
+    protected View mView;
+
     //=============must implements=============
     public int getContentLayout(){
         return 0;
@@ -20,14 +24,16 @@ public class BaseFragment extends Fragment implements BaseBuild {
 
     //=============option implements=============
     public BaseController getController(){return null;}
-    @Override
-    public void initViews(View view) {}
 
-    @Override
+    public void initViews(View view) {
+        mView = view;
+    }
+
+
     public void initDatas() {
         BaseController _control = getController();
         if(_control!=null) {
-            _control.registFragment(this);
+            _control.regist(this);
         }
     }
 
@@ -38,6 +44,7 @@ public class BaseFragment extends Fragment implements BaseBuild {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.d(TAG,"onCreateView :"+this);
         View view = inflater.inflate(getContentLayout(),null,false);
         initViews(view);
         initDatas();
@@ -49,7 +56,7 @@ public class BaseFragment extends Fragment implements BaseBuild {
     public void onDestroy() {
         BaseController _control = getController();
         if(_control!=null) {
-            _control.unregistFragment(this);
+            _control.unregist(this);
         }
         super.onDestroy();
     }

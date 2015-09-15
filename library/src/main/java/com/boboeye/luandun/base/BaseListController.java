@@ -1,13 +1,5 @@
 package com.boboeye.luandun.base;
 
-import android.util.Log;
-
-
-import java.util.ArrayList;
-import java.util.List;
-
-import de.greenrobot.event.EventBus;
-import de.greenrobot.event.Subscribe;
 
 /**
  * Created by libo_591 on 15/8/17.
@@ -32,5 +24,21 @@ public class BaseListController extends BaseController {
     public void requestPage(){
         mPageIndex = 0;
         requestSomePage(mPageIndex, countPerPage);
+    }
+
+    public int getmPageIndex() {
+        return mPageIndex;
+    }
+
+    public void setmPageIndex(int mPageIndex) {
+        this.mPageIndex = mPageIndex;
+    }
+
+    public int getCountPerPage() {
+        return countPerPage;
+    }
+
+    public void setCountPerPage(int countPerPage) {
+        this.countPerPage = countPerPage;
     }
 }

@@ -1,16 +1,26 @@
 <resources>
     <string name="app_name">Luandun</string>
+    <string name="main_title">个人专属app</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-
-    <string name="title_activity_start">StartActivity</string>
-    <string name="title_activity_base">BaseActivity</string>
-    <string name="title_activity_home">HomeActivity</string>
     <string name="drawerOpen">drawerOpen</string>
     <string name="drawerClose">drawerClose</string>
-    <string name="home_tabhost_often">常用</string>
     <string name="home_tabhost_discover">发现</string>
-
-
+    <string name="home_tabhost_settings">设置</string>
+    <string name="home_tabhost_theme">切换主题</string>
+    <string name="filemanager">文档管理</string>
+    <string name="edit">编辑</string>
+    <string name="delete">删除</string>
+    <string name="account">账户</string>
+    <string name="password">密码</string>
+    <string name="plzinput">请输入口令</string>
+    <string name="sure">确定</string>
+    <string name="cancel">取消</string>
+    <string name="name">名称</string>
+    <string name="processname">进程名称</string>
+    <string name="memoryuse">内存占用</string>
+    <string name="title">标题</string>
+    <string name="urltitle">URL</string>
+    <string name="myweibo">微博\nlibo591</string>
+    <string name="mygithub">github\nhttps://github.com/libo591/Luandun</string>
+    <string name="mydesc">密码管理，使用输入的口令，对相关信息进行加密。\n口令不保存。\n若查看时输入的口令与增加时的不同，则无法查看原信息。\n可登录网站申请密码信息销毁。</string>
 </resources>

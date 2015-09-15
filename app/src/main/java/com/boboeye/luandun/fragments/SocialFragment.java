@@ -3,7 +3,6 @@ package com.boboeye.luandun.fragments;
 import android.view.View;
 
 import com.boboeye.luandun.AppConfig;
-import com.boboeye.luandun.LuanApplication;
 import com.boboeye.luandun.R;
 import com.boboeye.luandun.adapter.SocialAdapter;
 import com.boboeye.luandun.base.BaseListAdapter;

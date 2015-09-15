@@ -1,28 +1,54 @@
 package com.boboeye.luandun.fragments;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.content.Intent;
 import android.view.View;
-import android.view.ViewGroup;
 
+import com.boboeye.luandun.AppConfig;
 import com.boboeye.luandun.R;
+import com.boboeye.luandun.activitys.SettingsActivity;
+import com.boboeye.luandun.activitys.WebViewActivity;
 import com.boboeye.luandun.base.BaseFragment;
+
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  *
  */
 public class DrawerMenuFragment extends BaseFragment {
+    private static final String TAG = "DrawerMenuFragment";
 
-    public DrawerMenuFragment() {
-        // Required empty public constructor
+    @Override
+    public int getContentLayout() {
+        return R.layout.fragment_drawer_menu;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_drawer_menu, container, false);
+    public void initViews(View view) {
+        super.initViews(view);
+        ButterKnife.inject(this, view);
+
+    }
+    @OnClick(R.id.menu_dis)
+    public void disClick(){
+        Intent intent = new Intent(this.getActivity(), WebViewActivity.class);
+        intent.putExtra("url", "http://girl-atlas.com");
+        getActivity().startActivity(intent);
+    }
+    @OnClick(R.id.menu_set)
+    public void setClick(){
+        Intent intent = new Intent(this.getActivity(), SettingsActivity.class);
+        getActivity().startActivity(intent);
     }
 
-
+    @OnClick(R.id.menu_theme)
+    public void setTheme(){
+        String theme = AppConfig.getInst().getPrefer("apptheme","day");
+        if("day".equals(theme)){
+            AppConfig.getInst().setPrefer("apptheme","night");
+        }else{
+            AppConfig.getInst().setPrefer("apptheme","day");
+        }
+        getActivity().recreate();
+    }
 }

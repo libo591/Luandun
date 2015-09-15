@@ -1,16 +1,5 @@
 package com.boboeye.luandun.base;
 
-import android.app.Fragment;
-import android.os.AsyncTask;
-import android.util.Log;
-import android.util.SparseArray;
-import android.view.View;
-
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
@@ -18,14 +7,14 @@ import de.greenrobot.event.EventBus;
  * 所有controller的父类，子类必须重写getController，返回单例
  */
 public class BaseController {
-    public void registFragment(BaseFragment fragment){
-        if(!EventBus.getDefault().isRegistered(fragment)){
-            EventBus.getDefault().register(fragment);
+    public void regist(Object object){
+        if(!EventBus.getDefault().isRegistered(object)){
+            EventBus.getDefault().register(object);
         }
     }
-    public void unregistFragment(BaseFragment fragment){
-        if(EventBus.getDefault().isRegistered(fragment)){
-            EventBus.getDefault().unregister(fragment);
+    public void unregist(Object object){
+        if(EventBus.getDefault().isRegistered(object)){
+            EventBus.getDefault().unregister(object);
         }
     }
 

@@ -5,12 +5,9 @@ import android.view.ViewGroup;
 
 import com.boboeye.luandun.base.BaseFragment;
 import com.boboeye.luandun.base.BasePagerFragmentStateAdapter;
-import com.boboeye.luandun.fragments.MyNetManageFragment;
-import com.boboeye.luandun.fragments.PassManageFragment;
-import com.boboeye.luandun.fragments.PhoneManageFragment;
-import com.boboeye.luandun.fragments.ReaderFragment;
-import com.boboeye.luandun.fragments.SocialFragment;
-import com.boboeye.luandun.fragments.WebsiteContainer;
+import com.boboeye.luandun.fragments.WebSiteListFragment;
+import com.boboeye.luandun.fragments.AccountManageFragment;
+import com.boboeye.luandun.fragments.PhoneManagerMain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,10 +24,10 @@ public class HomeTabContentViewPagerAdapter extends BasePagerFragmentStateAdapte
     public List<BaseFragment> getFragments() {
         List<BaseFragment> list = new ArrayList<>();
         //list.add(new SocialFragment());
-        list.add(new WebsiteContainer());
-        list.add(new PhoneManageFragment());
-        list.add(new PassManageFragment());
-        list.add(new ReaderFragment());
+        list.add(new WebSiteListFragment());
+        list.add(new PhoneManagerMain());
+        list.add(new AccountManageFragment());
+        //list.add(new ReaderFragment());
         return list;
     }
 

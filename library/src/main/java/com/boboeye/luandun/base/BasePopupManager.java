@@ -1,7 +1,7 @@
 package com.boboeye.luandun.base;
 
 import android.content.Context;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Gravity;
@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.PopupWindow;
 
+import com.boboeye.library.R;
 import com.boboeye.luandun.AppConfig;
 
 /**
@@ -19,7 +20,7 @@ public class BasePopupManager {
     private static final String TAG = "BasePopupManager";
     private static SparseArray<PopupWindow> popupWindows = new SparseArray<PopupWindow>();
 
-    public static int addPopup(View view,View anchor,int gravity,int offx,int offy){
+    public static int addPopup(View view,View anchor,int gravity,int offx,int offy,int width,int height){
         if(view==null){
             return 0;
         }
@@ -28,19 +29,26 @@ public class BasePopupManager {
         PopupWindow popupWindow = getWindow(key);
         if(popupWindow==null) {
             popupWindow = new PopupWindow(view);
-            popupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
-            popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+            popupWindow.setWidth(width);
+            popupWindow.setHeight(height);
             popupWindow.setFocusable(true);
             popupWindow.setOutsideTouchable(true);
             popupWindow.setTouchable(true);
-            popupWindow.setBackgroundDrawable(new BitmapDrawable());
+            popupWindow.setAnimationStyle(R.style.popwindow_anim_style);
+            popupWindow.setBackgroundDrawable(new ColorDrawable());
         }
         popupWindow.showAtLocation(anchor, gravity, offx, offy);
         popupWindows.put(key,popupWindow);
         return key;
     }
     public static int addPopup(View view,Window window){
-        return addPopup(view, window.getDecorView(), Gravity.CENTER, 0, 0);
+        return addPopup(view, window, Gravity.CENTER,ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+    }
+    public static int addPopup(View view,Window window,int gravity,int width,int height){
+        return addPopup(view, window.getDecorView(), gravity, 0, 0,width,height);
+    }
+    public static int addPopup(View view,Window window,int width,int height){
+        return addPopup(view,window,Gravity.CENTER,width,height);
     }
     private static int toKey(View view){
         return view.getId();
@@ -87,8 +95,7 @@ public class BasePopupManager {
         int size = popupWindows.size();
         for(int i=0;i<size;i++){
             int key = popupWindows.keyAt(i);
-            PopupWindow window = popupWindows.get(key);
-            window.dismiss();
+            removePop(key);
         }
     }
 

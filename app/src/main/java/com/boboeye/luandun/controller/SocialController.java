@@ -9,9 +9,6 @@ import com.boboeye.luandun.model.service.impl.SocialNetModelService;
 import com.boboeye.luandun.socialopen.WeiBoController;
 
 import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**

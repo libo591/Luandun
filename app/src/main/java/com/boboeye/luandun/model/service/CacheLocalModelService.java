@@ -3,22 +3,15 @@ package com.boboeye.luandun.model.service;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.util.TypeUtils;
 import com.boboeye.luandun.AppConfig;
-import com.boboeye.luandun.LuanApplication;
 import com.boboeye.luandun.base.BaseLocalModelService;
 import com.boboeye.luandun.base.BaseModel;
-import com.boboeye.luandun.model.impl.NetModel;
 import com.jakewharton.disklrucache.DiskLruCache;
 
-import org.apache.http.NameValuePair;
 import org.kymjs.kjframe.utils.CipherUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 

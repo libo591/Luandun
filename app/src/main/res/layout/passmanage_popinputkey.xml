@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"  android:background="@color/day_colorPrimary">
+    <EditText
+        android:id="@+id/pass_inputkey" android:hint="@string/plzinput" style="@style/netinfowindow_edittext"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal">
+        <Button
+            android:id="@+id/pass_inputkey_submit"
+            android:text="@string/sure" style="@style/netinfowindow_button"/>
+        <Button
+            android:id="@+id/pass_inputkey_cancel"
+            android:text="@string/cancel" style="@style/netinfowindow_button"/>
+    </LinearLayout>
+</LinearLayout>

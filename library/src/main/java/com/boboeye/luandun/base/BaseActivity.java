@@ -1,6 +1,7 @@
 package com.boboeye.luandun.base;
 
-import android.app.FragmentManager;
+
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -12,13 +13,32 @@ import com.boboeye.library.R;
 
 public class BaseActivity extends ActionBarActivity {
 
+    public BaseController getController(){return null;}
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppConfig.getInst().setContext(this);
+        String theme = AppConfig.getInst().getPrefer("apptheme","");
+        if("night".equals(theme)) {
+            setTheme(R.style.Theme_Night);
+        }else{
+            setTheme(R.style.Theme_Default);
+        }
         initLayout();
-        initViews();
-        initData();
+        initViews(savedInstanceState);
+        initData(savedInstanceState);
+        BaseActivityStack.getInst().addActivity(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        BaseController _control = getController();
+        if(_control!=null) {
+            _control.unregist(this);
+        }
+        BaseActivityStack.getInst().removeActivity(this);
+        super.onDestroy();
     }
 
     public void initLayout() {
@@ -58,22 +78,25 @@ public class BaseActivity extends ActionBarActivity {
     //==========must implement===========
     //==========option implement===========
     public int getMenuLayout(){return 0;}
-    public void initViews() {
+    public void initViews(Bundle savedInstanceState) {
 
     }
 
-    public void initData(){
-
+    public void initData(Bundle savedInstanceState){
+        BaseController _control = getController();
+        if(_control!=null) {
+            _control.regist(this);
+        }
     }
     //==========must implement===========
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        BaseFragment bf = (BaseFragment)(getSupportFragmentManager().findFragmentByTag("browseweb"));
-        if(bf!=null){
-            if(bf!=null&&bf.onKeyDown(keyCode,event)){
-                return true;
-            }
-        }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void startActivity(Intent intent) {
+        super.startActivity(intent);
+        overridePendingTransition(R.anim.activity_fadein, R.anim.activity_fadeout);
     }
 }

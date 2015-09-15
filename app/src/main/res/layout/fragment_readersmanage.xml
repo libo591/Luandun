@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
-        android:text="文档管理"
+        android:text="@string/filemanager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>
