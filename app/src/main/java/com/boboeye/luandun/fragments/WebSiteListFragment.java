@@ -10,9 +10,11 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.boboeye.luandun.LuanApplication;
 import com.boboeye.luandun.R;
 import com.boboeye.luandun.activitys.WebViewActivity;
 import com.boboeye.luandun.adapter.WebSiteAdapter;
+import com.boboeye.luandun.base.BaseApplication;
 import com.boboeye.luandun.base.BaseController;
 import com.boboeye.luandun.base.BaseListAdapter;
 import com.boboeye.luandun.base.BaseListFragment;
@@ -21,6 +23,7 @@ import com.boboeye.luandun.controller.WebSiteController;
 import com.boboeye.luandun.event.WebSiteEvent;
 import com.boboeye.luandun.model.impl.WebSiteModel;
 import com.boboeye.luandun.utils.UrlUtil;
+import com.squareup.leakcanary.RefWatcher;
 
 import org.kymjs.kjframe.utils.CipherUtils;
 
@@ -124,7 +127,7 @@ public class WebSiteListFragment extends BaseListFragment
                 operPosition = -1;
                 modelViewTitle.setText("");
                 modelViewUrl.setText("");
-                BasePopupManager.addPopup(modelView, getActivity().getWindow(), Gravity.BOTTOM,
+                BasePopupManager.addPopup(modelView,getActivity().getWindow(), Gravity.BOTTOM,
                         ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         }else if(ne.getType()== WebSiteEvent.TYPE_BASELIST){
@@ -141,5 +144,13 @@ public class WebSiteListFragment extends BaseListFragment
             BasePopupManager.addPopup(modelView, getActivity().getWindow(), Gravity.BOTTOM,
                     ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.d(TAG,"=================destroy======================================");
+        super.onDestroy();
+        RefWatcher watcher = LuanApplication.getLeak(this.getActivity());
+        watcher.watch(this);
     }
 }

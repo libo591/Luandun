@@ -98,4 +98,11 @@ public class BaseListFragment extends BaseFragment implements AbsListView.OnScro
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
         return false;
     }
+
+    @Override
+    public void onDestroy() {
+        mListView.setOnItemClickListener(null);
+        mListView.setOnItemLongClickListener(null);
+        super.onDestroy();
+    }
 }

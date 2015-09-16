@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.PopupWindow;
 
 import com.boboeye.library.R;
@@ -34,6 +35,8 @@ public class BasePopupManager {
             popupWindow.setFocusable(true);
             popupWindow.setOutsideTouchable(true);
             popupWindow.setTouchable(true);
+            popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+            popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
             popupWindow.setAnimationStyle(R.style.popwindow_anim_style);
             popupWindow.setBackgroundDrawable(new ColorDrawable());
         }
@@ -49,6 +52,9 @@ public class BasePopupManager {
     }
     public static int addPopup(View view,Window window,int width,int height){
         return addPopup(view,window,Gravity.CENTER,width,height);
+    }
+    public static int addPopup(View view,View anchor,int gravity,int width,int height){
+        return addPopup(view, anchor, gravity, 0, 0,width,height);
     }
     private static int toKey(View view){
         return view.getId();
@@ -98,6 +104,8 @@ public class BasePopupManager {
             removePop(key);
         }
     }
+
+
 
 
 }

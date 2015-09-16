@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.boboeye.luandun.AppConfig;
+import com.boboeye.luandun.LuanApplication;
 import com.boboeye.luandun.R;
 import com.boboeye.luandun.adapter.ProcessAdapter;
 import com.boboeye.luandun.base.BaseController;
@@ -14,6 +15,7 @@ import com.boboeye.luandun.base.BaseListFragment;
 import com.boboeye.luandun.controller.ProcessController;
 import com.boboeye.luandun.event.ProcessEvent;
 import com.boboeye.luandun.model.impl.ProcessModel;
+import com.squareup.leakcanary.RefWatcher;
 
 import de.greenrobot.event.Subscribe;
 
@@ -58,5 +60,12 @@ public class ProcessListFragment extends BaseListFragment {
         }
         this.onRefresh();
         return true;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RefWatcher watcher = LuanApplication.getLeak(this.getActivity());
+        watcher.watch(this);
     }
 }

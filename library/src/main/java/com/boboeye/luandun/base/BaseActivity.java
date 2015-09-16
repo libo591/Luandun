@@ -38,6 +38,7 @@ public class BaseActivity extends ActionBarActivity {
             _control.unregist(this);
         }
         BaseActivityStack.getInst().removeActivity(this);
+        AppConfig.getInst().setContext(BaseActivityStack.getInst().getLast());
         super.onDestroy();
     }
 

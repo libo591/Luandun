@@ -3,7 +3,9 @@ package com.boboeye.luandun.activitys;
 import android.content.res.Configuration;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 import com.boboeye.luandun.R;
 import com.boboeye.luandun.base.BaseActivity;
@@ -14,6 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 public class HomeActivity extends BaseActivity {
+    private static final String TAG = HomeActivity.class.getSimpleName();
     private DrawerLayoutProxy mDrawerLayoutProxy;
     @InjectView(R.id.home_drawerlayout)
     public DrawerLayout mDrawerLayout;
@@ -61,5 +64,4 @@ public class HomeActivity extends BaseActivity {
     public int getMenuLayout() {
         return R.menu.menu_home;
     }
-
 }

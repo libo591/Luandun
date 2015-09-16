@@ -26,6 +26,9 @@ public class HomeViewPagerController {
     public void registViewPager(ViewPager viewPager){
         this.mViewPager = viewPager;
     }
+    public void unRegistViewPager(){
+        this.mViewPager = null;
+    }
 
     public int getViewPagerShowItem(){
         if(this.mViewPager!=null){

@@ -1,5 +1,7 @@
 package com.boboeye.luandun.base;
 
+import android.app.Activity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,5 +80,13 @@ public class BaseActivityStack {
         BaseActivity first = stack.get(0);
         stack.clear();
         stack.add(first);
+    }
+
+    public Activity getLast(){
+        int len = stack.size();
+        if(len>0){
+            return stack.get(len-1);
+        }
+        return null;
     }
 }

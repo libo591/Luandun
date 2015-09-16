@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.boboeye.luandun.LuanApplication;
 import com.boboeye.luandun.R;
 import com.boboeye.luandun.base.BaseBackActivity;
 import com.boboeye.luandun.base.BaseController;
@@ -20,6 +21,7 @@ import com.boboeye.luandun.base.BasePopupManager;
 import com.boboeye.luandun.controller.WebSiteController;
 import com.boboeye.luandun.event.WebSiteEvent;
 import com.boboeye.luandun.model.impl.WebSiteModel;
+import com.squareup.leakcanary.RefWatcher;
 
 import net.i2p.android.ext.floatingactionbutton.FloatingActionButton;
 
@@ -135,5 +137,12 @@ public class WebViewActivity extends BaseBackActivity implements View.OnClickLis
     @Override
     public BaseController getController() {
         return WebSiteController.getInst();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RefWatcher watcher = LuanApplication.getLeak(this);
+        watcher.watch(this);
     }
 }

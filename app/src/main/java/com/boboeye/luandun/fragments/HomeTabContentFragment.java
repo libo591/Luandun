@@ -1,6 +1,7 @@
 package com.boboeye.luandun.fragments;
 
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -15,6 +16,8 @@ import com.boboeye.luandun.view.PagerSlidingTabStrip;
  * Created by libo_591 on 15/7/26.
  */
 public class HomeTabContentFragment extends BaseFragment {
+    private static final String TAG = HomeTabContentFragment.class.getSimpleName();
+
     @Override
     public int getContentLayout() {
         return R.layout.fragment_hometabcontent;
@@ -41,5 +44,12 @@ public class HomeTabContentFragment extends BaseFragment {
         viewPager.setCurrentItem(0);
 
         HomeViewPagerController.getInst().registViewPager(viewPager);
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.d(TAG, "=================destroy======================================");
+        HomeViewPagerController.getInst().unRegistViewPager();
+        super.onDestroy();
     }
 }
