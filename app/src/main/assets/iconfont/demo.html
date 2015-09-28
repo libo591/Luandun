@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>IconFont</title>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="stylesheet" href="iconfont.css">
+</head>
+<body>
+    <div class="main">
+        <h1>IconFont 图标</h1>
+        <ul class="icon_lists clear">
+            
+                <li>
+                <i class="icon iconfont">&#xe61f;</i>
+                    <div class="name">space</div>
+                    <div class="code">&amp;#xe61f;</div>
+                    <div class="fontclass">.62gongzuokongjian</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe64f;</i>
+                    <div class="name">add</div>
+                    <div class="code">&amp;#xe64f;</div>
+                    <div class="fontclass">.add</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe739;</i>
+                    <div class="name">discover_hl</div>
+                    <div class="code">&amp;#xe739;</div>
+                    <div class="fontclass">.discoverhl</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe617;</i>
+                    <div class="name">编辑</div>
+                    <div class="code">&amp;#xe617;</div>
+                    <div class="fontclass">.iconfontbianji1</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe6a6;</i>
+                    <div class="name">password</div>
+                    <div class="code">&amp;#xe6a6;</div>
+                    <div class="fontclass">.password</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe608;</i>
+                    <div class="name">lock</div>
+                    <div class="code">&amp;#xe608;</div>
+                    <div class="fontclass">.lock</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe612;</i>
+                    <div class="name">unlock</div>
+                    <div class="code">&amp;#xe612;</div>
+                    <div class="fontclass">.unlock</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe62c;</i>
+                    <div class="name">myfill</div>
+                    <div class="code">&amp;#xe62c;</div>
+                    <div class="fontclass">.myfill</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe6ce;</i>
+                    <div class="name">process</div>
+                    <div class="code">&amp;#xe6ce;</div>
+                    <div class="fontclass">.process</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe643;</i>
+                    <div class="name">option</div>
+                    <div class="code">&amp;#xe643;</div>
+                    <div class="fontclass">.option</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe600;</i>
+                    <div class="name">iconfont-servicefill</div>
+                    <div class="code">&amp;#xe600;</div>
+                    <div class="fontclass">.iconfontservicefill</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe64d;</i>
+                    <div class="name">style</div>
+                    <div class="code">&amp;#xe64d;</div>
+                    <div class="fontclass">.style</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe65c;</i>
+                    <div class="name">ic_submit</div>
+                    <div class="code">&amp;#xe65c;</div>
+                    <div class="fontclass">.makaicon13</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe616;</i>
+                    <div class="name">title</div>
+                    <div class="code">&amp;#xe616;</div>
+                    <div class="fontclass">.title</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe602;</i>
+                    <div class="name">setting</div>
+                    <div class="code">&amp;#xe602;</div>
+                    <div class="fontclass">.setting</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe64c;</i>
+                    <div class="name">delete</div>
+                    <div class="code">&amp;#xe64c;</div>
+                    <div class="fontclass">.delete</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont">&#xe615;</i>
+                    <div class="name">account</div>
+                    <div class="code">&amp;#xe615;</div>
+                    <div class="fontclass">.account</div>
+                </li>
+            
+        </ul>
+
+
+        <div class="helps">
+            第一步：使用font-face声明字体
+            <pre>
+@font-face {font-family: 'iconfont';
+    src: url('iconfont.eot'); /* IE9*/
+    src: url('iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('iconfont.woff') format('woff'), /* chrome、firefox */
+    url('iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+</pre>
+第二步：定义使用iconfont的样式
+            <pre>
+.iconfont{
+    font-family:"iconfont" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;}
+</pre>
+第三步：挑选相应图标并获取字体编码，应用于页面
+<pre>
+&lt;i class="iconfont"&gt;&amp;#x33;&lt;/i&gt;
+</pre>
+        </div>
+
+    </div>
+</body>
+</html>

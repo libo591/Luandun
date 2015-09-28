@@ -33,7 +33,7 @@ public class AccountModel extends BaseModel {
 
     private String name;
     private String password;
-    private int type;
+    private String type;
 
     public String getName() {
         return name;
@@ -51,11 +51,11 @@ public class AccountModel extends BaseModel {
         this.password = password;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 }

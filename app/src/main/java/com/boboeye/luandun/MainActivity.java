@@ -3,6 +3,8 @@ package com.boboeye.luandun;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -15,6 +17,7 @@ import butterknife.InjectView;
 
 
 public class MainActivity extends Activity implements Animation.AnimationListener {
+    private static final String TAG = MainActivity.class.getSimpleName();
     @InjectView(R.id.frameLayout)
     public FrameLayout frameLayout;
     @Override
@@ -23,6 +26,9 @@ public class MainActivity extends Activity implements Animation.AnimationListene
         initWindow();
         setContentView(R.layout.activity_main);
         startHomeActivity();
+        ///data--/system--/storage/emulated/0---/cache
+//        Log.d(TAG, Environment.getDataDirectory().getAbsolutePath() + "--" + Environment.getRootDirectory().getAbsolutePath()
+//                + "--" + Environment.getExternalStorageDirectory().getAbsolutePath() + "---" + Environment.getDownloadCacheDirectory().getAbsolutePath());
     }
 
     private void initWindow() {
@@ -47,7 +53,6 @@ public class MainActivity extends Activity implements Animation.AnimationListene
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
         finish();
-        overridePendingTransition(R.anim.activity_fadein,R.anim.activity_fadeout);
     }
 
     @Override

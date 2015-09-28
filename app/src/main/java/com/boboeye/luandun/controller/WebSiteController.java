@@ -1,6 +1,7 @@
 package com.boboeye.luandun.controller;
 
 import android.util.Log;
+import android.view.View;
 
 import com.boboeye.luandun.base.BaseListController;
 import com.boboeye.luandun.base.BaseLocalModelService;
@@ -12,6 +13,7 @@ import com.boboeye.luandun.utils.UrlUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * Created by libo_591 on 15/8/5.
@@ -41,6 +43,7 @@ public class WebSiteController extends BaseListController {
         if(netModels.size()<=0){
             Log.d(TAG, "数据小于0，使用模拟数据");
             netModels.addAll(createSystemDatas());
+            localService.createDataList(netModels);
         }
         return netModels;
     }
@@ -105,18 +108,14 @@ public class WebSiteController extends BaseListController {
 
     public List<BaseModel> createSystemDatas(){
         List<BaseModel> models = new ArrayList<BaseModel>();
-        String[] names = {"百度","网易",
-        "CSDN","codeKK",
-        "博客园","Innost博客",
-        "GITHUB","oschina-git",
-        "StackOverFlow","JAVAEYE",
-        "eoeandroid"};
-        String[] urls = {"http://www.baidu.com/","http://www.163.com",
-        "http://blog.csdn.net/","http://codekk.com/",
-        "http://www.cnblogs.com/","http://blog.csdn.net/Innost/article/list/8",
-        "https://github.com/","http://git.oschina.net/",
-        "http://stackoverflow.com/","http://javaeye.com",
-        "http://www.eoeandroid.com/"};
+        String[] names = {"百度","百度网址大全","腾讯","QQ空间",
+                "凤凰网","搜狐","网易","163邮箱",
+                "新浪体育","优酷","爱奇艺"
+        };
+        String[] urls = {"http://www.baidu.com/","http://site.baidu.com","http://www.qq.com","http://qzone.qq.com/",
+                "http://www.ifeng.com/","http://www.sohu.com/","http://www.163.com","http://mail.163.com",
+                "http://sports.sina.com.cn/","http://www.youku.com","http://iqiyi.com"
+        };
         int size = names.length;
         for(int i=0;i<size;i++){
             WebSiteModel netmodel = new WebSiteModel();

@@ -4,23 +4,21 @@
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" android:background="?attr/menu_bg">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:orientation="horizontal">
-            <TextView android:text="@string/processname" style="@style/menutextstyle"></TextView>
-            <TextView android:id="@+id/process_name" style="@style/menutextstyle" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:orientation="horizontal">
-            <TextView android:text="@string/memoryuse" style="@style/menutextstyle"></TextView>
-            <TextView android:id="@+id/process_memory" style="@style/menutextstyle"></TextView>
-        </LinearLayout>
+        android:layout_height="wrap_content" android:orientation="horizontal">
+        <ImageButton android:id="@+id/process_icon" style="@style/normalicon"/>
+        <TextView android:id="@+id/process_name" style="@style/menutextstyle" />
+        <TextView android:id="@+id/process_memory" style="@style/menutextstyle"></TextView>
     </LinearLayout>
-    <TextView
-        android:id="@+id/process_state"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:visibility="gone"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/process_kill"
+            android:text="结束"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="8dp"
+            android:background="?attr/button_bg" />
+    </RelativeLayout>
 </FrameLayout>

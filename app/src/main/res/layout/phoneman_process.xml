@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ListView android:id="@+id/pm_processlist" xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:divider="?attr/menu_line" android:dividerHeight="1dp">
+<android.support.v4.widget.SwipeRefreshLayout android:id="@+id/process_refreshlayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <ListView android:id="@+id/pm_processlist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="?attr/menu_line" android:dividerHeight="1dp"
+        android:background="?attr/menu_bg" android:descendantFocusability="blocksDescendants">
 
-</ListView>
+    </ListView>
+</android.support.v4.widget.SwipeRefreshLayout>

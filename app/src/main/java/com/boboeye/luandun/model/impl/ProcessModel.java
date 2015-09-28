@@ -1,5 +1,8 @@
 package com.boboeye.luandun.model.impl;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+
 import com.boboeye.luandun.base.BaseModel;
 
 /**
@@ -10,6 +13,7 @@ public class ProcessModel extends BaseModel {
     private int importance;
     private int memory;
     private String packageName;
+    private Drawable icon;
 
     public String getName() {
         return name;
@@ -41,5 +45,13 @@ public class ProcessModel extends BaseModel {
 
     public void setPackageName(String packageName) {
         this.packageName = packageName;
+    }
+
+    public Drawable getIcon() {
+        return icon;
+    }
+
+    public void setIcon(Drawable icon) {
+        this.icon = icon;
     }
 }

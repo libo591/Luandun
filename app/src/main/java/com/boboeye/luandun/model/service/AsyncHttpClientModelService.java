@@ -1,5 +1,8 @@
 package com.boboeye.luandun.model.service;
 
+import android.support.v4.util.SimpleArrayMap;
+import android.util.SparseArray;
+
 import com.boboeye.luandun.base.BaseModel;
 import com.boboeye.luandun.base.BaseNetWorkModelService;
 import com.loopj.android.http.AsyncHttpClient;
@@ -29,11 +32,11 @@ public class AsyncHttpClientModelService extends BaseNetWorkModelService {
     private AsyncHttpClient mClient = new AsyncHttpClient();
     //=======create==
     public int createData(List<NameValuePair> pairs){
-        createData(getCreateUrl(),pairs);
+        createData(getCreateUrl(), pairs);
         return 0;
     }
     public int createData(String url,List<NameValuePair> pairs){
-        reqByHttpClient(url, convertPairs2RequestParams(pairs));
+        reqByHttpClient(url, convertPairs2RequestParams(pairs), null);
         return 0;
     }
     public int createDataList(List<NameValuePair> pairs){
@@ -87,15 +90,19 @@ public class AsyncHttpClientModelService extends BaseNetWorkModelService {
         return null;
     }
     public BaseModel referData(String url,List<NameValuePair> pairs){
-        reqByHttpClient(url,convertPairs2RequestParams(pairs));
+        reqByHttpClient(url, convertPairs2RequestParams(pairs), null);
         return null;
     }
     public List<BaseModel> referDatas(List<NameValuePair> pairs){
-        referDatas(getReferListUrl(),pairs);
+        referDatas(getReferListUrl(), pairs, null);
         return null;
     }
     public List<BaseModel> referDatas(String url,List<NameValuePair> pairs){
-        reqByHttpClient(url,convertPairs2RequestParams(pairs));
+        reqByHttpClient(url, convertPairs2RequestParams(pairs), null);
+        return null;
+    }
+    public List<BaseModel> referDatas(String url,List<NameValuePair> pairs,SimpleArrayMap<String,String> heads){
+        reqByHttpClient(url,convertPairs2RequestParams(pairs),heads);
         return null;
     }
     //=======refer===
@@ -107,8 +114,20 @@ public class AsyncHttpClientModelService extends BaseNetWorkModelService {
     }
 
     private void reqByHttpClient(String url,RequestParams params){
+        reqByHttpClient(url,params,null);
+    }
+
+    private void reqByHttpClient(String url,RequestParams params,SimpleArrayMap<String,String> heads){
         if(params==null){
             params = new RequestParams();
+        }
+        if(heads!=null){
+            int hsize = heads.size();
+            for(int i=0;i<hsize;i++){
+                String key = heads.keyAt(i);
+                String value = heads.get(key);
+                mClient.addHeader(key,value);
+            }
         }
         mClient.post(url,params,fetchInstanceJsonHandler());
     }

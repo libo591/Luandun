@@ -1,7 +1,6 @@
 <resources>
-    <string name="app_name">Luandun</string>
-    <string name="main_title">个人专属app</string>
-
+    <string name="app_name">专属APP</string>
+    <string name="app_start_title">为您私人定制的APP</string>
     <string name="drawerOpen">drawerOpen</string>
     <string name="drawerClose">drawerClose</string>
     <string name="home_tabhost_discover">发现</string>
@@ -20,7 +19,37 @@
     <string name="memoryuse">内存占用</string>
     <string name="title">标题</string>
     <string name="urltitle">URL</string>
-    <string name="myweibo">微博\nlibo591</string>
-    <string name="mygithub">github\nhttps://github.com/libo591/Luandun</string>
-    <string name="mydesc">密码管理，使用输入的口令，对相关信息进行加密。\n口令不保存。\n若查看时输入的口令与增加时的不同，则无法查看原信息。\n可登录网站申请密码信息销毁。</string>
+    <string name="mygithubtitle">&lt;b&gt;APP源码地址&lt;/b&gt;</string>
+    <string name="myweibotitle">&lt;b&gt;联系方式&lt;/b&gt;</string>
+    <string name="websitetitle">&lt;b&gt;网站管理相关&lt;/b&gt;</string>
+    <string name="phonemantitle">&lt;b&gt;手机管理相关&lt;/b&gt;</string>
+    <string name="passtitle">&lt;b&gt;密码管理相关&lt;/b&gt;</string>
+    <string name="customtitle">&lt;b&gt;建议及定制化&lt;/b&gt;</string>
+    <string name="mygithubdesc">&lt;u&gt;github&lt;/u&gt; 如果你喜欢这个app,请使用你的github账号给我的项目加个星</string>
+    <string name="myweibodesc">&lt;u&gt;新浪微博&lt;/u&gt;</string>
+    <string name="websitedesc">方便直接打开常看网站</string>
+    <string name="phonemandesc">在不root的情况下管理手机</string>
+    <string name="passdesc">使用一个口令管理其他密码。口令长度需10位以上</string>
+    <string name="customdesc">可到微博下提建议增加相应功能，相同建议的人多，会进行增加，开发后在应用商店更新app</string>
+    <string name="mainpage_title">&lt;b&gt;首页标题&lt;/b&gt;</string>
+    <string name="main_title">个人专属app</string>
+    <string name="cleanall">一键清理</string>
+    <!-- iconfont -->
+    <string name="menu_add">&#xe64f;</string>
+    <string name="discover_icon">&#xe739;</string>
+    <string name="space_icon">&#xe61f;</string>
+    <string name="process_icon">&#xe6ce;</string>
+    <string name="account_icon">&#xe615;</string>
+    <string name="option_icon">&#xe643;</string>
+    <string name="service_icon">&#xe600;</string>
+    <string name="delete_icon">&#xe64c;</string>
+    <string name="set_icon">&#xe602;</string>
+    <string name="menu_theme">&#xe64d;</string>
+    <string name="edit_icon">&#xe617;</string>
+    <string name="submit_icon">&#xe65c;</string>
+    <string name="password_icon">&#xe608;</string>
+    <string name="lock_icon">&#xe6a6;</string>
+    <string name="unlock_icon">&#xe612;</string>
+    <string name="my_icon">&#xe62c;</string>
+    <string name="title_icon">&#xe616;</string>
 </resources>

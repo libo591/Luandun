@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.view.WindowManager;
 
 /**
@@ -12,7 +13,9 @@ import android.view.WindowManager;
 public class AppConfig {
     public static final String PREFER_COMMONNAME = "luandun";
     private static AppConfig _inst = new AppConfig();
+    private AppConfig(){}
     private Context mContext;
+    private Typeface typeFace;
     public static AppConfig getInst(){
         return _inst;
     }
@@ -20,6 +23,7 @@ public class AppConfig {
 
     public void setContext(Context context){
         mContext = context;
+        typeFace = Typeface.createFromAsset(mContext.getAssets(), "iconfont/iconfont.ttf");
     }
     public Context getContext(){
         return mContext;
@@ -52,5 +56,13 @@ public class AppConfig {
         SharedPreferences sp = mContext.getSharedPreferences(PREFER_COMMONNAME, Context.MODE_PRIVATE);
         String value = sp.getString(key,defValue);
         return value;
+    }
+
+    public Typeface getTypeFace() {
+        return typeFace;
+    }
+
+    public void setTypeFace(Typeface typeFace) {
+        this.typeFace = typeFace;
     }
 }

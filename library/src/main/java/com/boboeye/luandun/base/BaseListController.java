@@ -16,13 +16,12 @@ public class BaseListController extends BaseController {
     }
     //==================must implement
     public void requestNextPage(){
-        requestSomePage(mPageIndex++, countPerPage);
+        requestSomePage(++mPageIndex, countPerPage);
     }
     public void refresh(){
         requestPage();
     }
     public void requestPage(){
-        mPageIndex = 0;
         requestSomePage(mPageIndex, countPerPage);
     }
 

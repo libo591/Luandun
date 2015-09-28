@@ -6,15 +6,19 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Debug;
 import android.util.Log;
+import android.view.View;
 
 import com.boboeye.luandun.AppConfig;
 import com.boboeye.luandun.base.BaseListController;
+import com.boboeye.luandun.base.BaseModel;
 import com.boboeye.luandun.event.ProcessEvent;
+import com.boboeye.luandun.event.WebSiteEvent;
 import com.boboeye.luandun.model.impl.ProcessModel;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 
 /**
  * Created by libo_591 on 15/8/22.
@@ -28,18 +32,21 @@ public class ProcessController extends BaseListController {
     }
     @Override
     protected void requestSomePage(int index, int count) {
+        Class[] clzs = {};
+        Object[] objs = {};
+        doInAsyncTask(this,"doRequestSomePage",clzs,objs,"afterReqSomePage");
+    }
+
+    public List<BaseModel> doRequestSomePage(){
         Context ctx = AppConfig.getInst().getContext();
         ActivityManager am = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
         PackageManager packMan = ctx.getPackageManager();
         List<ApplicationInfo> applist = packMan.getInstalledApplications(0);
 
-        List<ActivityManager.RunningServiceInfo> ss = am.getRunningServices(Integer.MAX_VALUE);
         List<ActivityManager.RunningAppProcessInfo> appPro = am.getRunningAppProcesses();
-        int sizeService = ss.size();
-        Log.d(TAG, "appService数目:" + sizeService);
         int size = appPro.size();
         Log.d(TAG, "appProcess数目:" + size);
-        List<ProcessModel> list = new ArrayList<ProcessModel>(size);
+        List<BaseModel> list = new ArrayList<BaseModel>(size);
         for(int i=0;i<size;i++){
             ActivityManager.RunningAppProcessInfo pro = appPro.get(i);
             if(pro.importance<= ActivityManager.RunningAppProcessInfo.IMPORTANCE_BACKGROUND) {
@@ -51,23 +58,13 @@ public class ProcessController extends BaseListController {
                     ApplicationInfo appInfo = iter.next();
                     if (appInfo.processName.equals(pro.processName)) {
                         pm.setName(appInfo.loadLabel(packMan).toString());
+                        pm.setIcon(appInfo.loadIcon(packMan));
                         pm.setPackageName(appInfo.packageName);
                         break;
                     }
                 }
                 pm.setImportance(pro.importance);
                 list.add(pm);
-            }
-        }
-        for(int i=0;i<sizeService;i++){
-            ActivityManager.RunningServiceInfo service = ss.get(i);
-            if(service.foreground) {
-                ProcessModel pm = new ProcessModel();
-                pm.setId(service.pid + "");
-                pm.setName("service:" + service.process +
-                        "-" + service.service.getShortClassName());
-                pm.setPackageName(service.service.getPackageName());
-                pm.setImportance(ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND);
             }
         }
         int listsize = list.size();
@@ -79,9 +76,34 @@ public class ProcessController extends BaseListController {
         int msize = memoryinfos.length;
         for(int i=0;i<msize;i++){
             Debug.MemoryInfo memoryinfo = memoryinfos[i];
-            list.get(i).setMemory(memoryinfo.dalvikPrivateDirty);
+            ((ProcessModel)list.get(i)).setMemory(memoryinfo.dalvikPrivateDirty);
         }
+        return list;
 
-        getBus().post(new ProcessEvent(ProcessEvent.TYPE_BASELIST,list));
+    }
+
+    public void afterReqSomePage(ArrayList<BaseModel> list){
+        getBus().post(new ProcessEvent(ProcessEvent.TYPE_BASELIST, list));
+    }
+
+
+
+    public void killProccess(ProcessModel pm){
+        Class[] clz = {ProcessModel.class};
+        Object[] obj = {pm};
+        doInAsyncTask(this,"doKillProcess",clz,obj,"afterKillProcess");
+    }
+
+    public void doKillProcess(ProcessModel pm){
+        Context ctx = AppConfig.getInst().getContext();
+        ActivityManager am = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
+        try {
+            am.killBackgroundProcesses(pm.getPackageName());
+        }catch(Throwable e){
+            e.printStackTrace();
+        }
+    }
+    public void afterKillProcess(){
+        getBus().post(new ProcessEvent(ProcessEvent.TYPE_DELETE, null));
     }
 }

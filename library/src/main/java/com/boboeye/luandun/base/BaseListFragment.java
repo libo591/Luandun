@@ -86,6 +86,8 @@ public class BaseListFragment extends BaseFragment implements AbsListView.OnScro
             int pageindex = ((BaseListController)getController()).getmPageIndex();
             int count = ((BaseListController)getController()).getCountPerPage();
             mAdapter.addDatas(models);
+        }else if(baseEvent.getType()==BaseEvent.TYPE_REFRESH){
+            onRefresh();
         }
 
     }

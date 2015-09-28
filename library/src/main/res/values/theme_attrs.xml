@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="button_bg" format="reference"></attr>
     <attr name="menu_bg" format="reference"></attr>
     <attr name="menu_line" format="reference"></attr>
     <attr name="tab_block" format="reference"></attr>

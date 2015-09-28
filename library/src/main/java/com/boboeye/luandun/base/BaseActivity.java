@@ -19,13 +19,11 @@ public class BaseActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppConfig.getInst().setContext(this);
-        String theme = AppConfig.getInst().getPrefer("apptheme","");
-        if("night".equals(theme)) {
-            setTheme(R.style.Theme_Night);
-        }else{
-            setTheme(R.style.Theme_Default);
-        }
+        String theme = AppConfig.getInst().getPrefer("apptheme",R.style.Theme_Default+"");
+        setTheme(Integer.parseInt(theme));
         initLayout();
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        this.getSupportActionBar().setDisplayShowTitleEnabled(true);
         initViews(savedInstanceState);
         initData(savedInstanceState);
         BaseActivityStack.getInst().addActivity(this);

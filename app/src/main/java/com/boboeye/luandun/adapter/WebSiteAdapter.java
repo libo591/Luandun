@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.boboeye.luandun.AppConfig;
 import com.boboeye.luandun.R;
 import com.boboeye.luandun.base.BaseListAdapter;
 import com.boboeye.luandun.controller.WebSiteController;
@@ -23,6 +24,9 @@ import org.kymjs.kjframe.KJBitmap;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 /**
  * Created by libo_591 on 15/8/4.
@@ -53,7 +57,7 @@ public class WebSiteAdapter extends BaseListAdapter {
         final WebSiteModel netModel = (WebSiteModel)getItem(position);
         final int opPos = position;
 
-        ImageView option = vh.option;
+        TextView option = vh.option;
         option.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -104,23 +108,29 @@ public class WebSiteAdapter extends BaseListAdapter {
         if(convertView==null){
             convertView = LayoutInflater.from(mContext).inflate(R.layout.netmanage_item, null);
             ViewHolder vh = new ViewHolder();
-            vh.icon = (ImageView) convertView.findViewById(R.id.netitem_icon);
-            vh.title = (TextView) convertView.findViewById(R.id.netitem_title);
-            vh.optionbox = (LinearLayout) convertView.findViewById(R.id.netitem_optionbox);
-            vh.edit = (TextView)convertView.findViewById(R.id.netitem_edit);
-            vh.delete = (TextView)convertView.findViewById(R.id.netitem_delete);
-            vh.option = (ImageView)convertView.findViewById(R.id.netitem_option);
+            ButterKnife.inject(vh,convertView);
+            vh.option.setTypeface(AppConfig.getInst().getTypeFace());
+            vh.edit.setTypeface(AppConfig.getInst().getTypeFace());
+            vh.edit.setText(R.string.edit_icon);
+            vh.delete.setTypeface(AppConfig.getInst().getTypeFace());
+            vh.delete.setText(R.string.delete_icon);
             convertView.setTag(vh);
         }
         return convertView;
     }
 
     class ViewHolder{
+        @InjectView(R.id.netitem_icon)
         public ImageView icon;
+        @InjectView(R.id.netitem_title)
         public TextView title;
+        @InjectView(R.id.netitem_optionbox)
         public LinearLayout optionbox;
+        @InjectView(R.id.netitem_edit)
         public TextView edit;
+        @InjectView(R.id.netitem_delete)
         public TextView delete;
-        public ImageView option;
+        @InjectView(R.id.netitem_option)
+        public TextView option;
     }
 }

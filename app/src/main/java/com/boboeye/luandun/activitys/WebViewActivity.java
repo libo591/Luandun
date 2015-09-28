@@ -1,12 +1,15 @@
 package com.boboeye.luandun.activitys;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -27,15 +30,20 @@ import net.i2p.android.ext.floatingactionbutton.FloatingActionButton;
 
 import org.kymjs.kjframe.utils.CipherUtils;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import de.greenrobot.event.Subscribe;
 
 /**
  * Created by libo_591 on 15/9/5.
  */
-public class WebViewActivity extends BaseBackActivity implements View.OnClickListener {
-    private WebView browseweb_webview;
+public class WebViewActivity extends BaseBackActivity implements View.OnClickListener,SwipeRefreshLayout.OnRefreshListener {
+    @InjectView(R.id.browseweb_webview)
+    public WebView browseweb_webview;
 
     private View popView;
+    @InjectView(R.id.webview_refresh)
+    public SwipeRefreshLayout webview_refresh;
 
     @Override
     public int getContentLayout() {
@@ -45,12 +53,27 @@ public class WebViewActivity extends BaseBackActivity implements View.OnClickLis
     @Override
     public void initViews(Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
-        browseweb_webview = (WebView)findViewById(R.id.browseweb_webview);
-        browseweb_webview.setWebViewClient(new WebViewClient(){
+        ButterKnife.inject(this);
+        browseweb_webview.setWillNotCacheDrawing(true);
+        browseweb_webview.setInitialScale(100);
+        WebSettings wbSet = browseweb_webview.getSettings();
+        wbSet.setJavaScriptEnabled(true);
+        browseweb_webview.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
                 return true;
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        webview_refresh.setRefreshing(false);
+                    }
+                },100);
             }
         });
         browseweb_webview.setWebChromeClient(new WebChromeClient(){
@@ -66,6 +89,9 @@ public class WebViewActivity extends BaseBackActivity implements View.OnClickLis
         nextBtn.setOnClickListener(this);
         FloatingActionButton addBtn = (FloatingActionButton)findViewById(R.id.browseweb_fab_add);
         addBtn.setOnClickListener(this);
+
+        webview_refresh.setColorSchemeColors(R.color.day_colorPrimary);
+        webview_refresh.setOnRefreshListener(this);
     }
 
     @Override
@@ -96,10 +122,10 @@ public class WebViewActivity extends BaseBackActivity implements View.OnClickLis
             }
             ((EditText)popView.findViewById(R.id.netmodelview_title)).setText(title);
             ((EditText)popView.findViewById(R.id.netmodelview_url)).setText(url);
-            BasePopupManager.addPopup(popView, this.getWindow(), Gravity.BOTTOM, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            BasePopupManager.getInst().addPopup(popView, this.getWindow(), Gravity.BOTTOM, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         }else if(v.getId()==R.id.netmodelview_cancel){
-            BasePopupManager.removeAllPops();
+            BasePopupManager.getInst().removeAllPops();
         }else if(v.getId()==R.id.netmodelview_edit){
             String url = browseweb_webview.getUrl();
             WebSiteModel netmodel = new WebSiteModel();
@@ -109,7 +135,7 @@ public class WebViewActivity extends BaseBackActivity implements View.OnClickLis
             netmodel.setTitle(browseweb_webview.getTitle());
             netmodel.setId(CipherUtils.md5(url));
             WebSiteController.getInst().add(netmodel);
-            BasePopupManager.removeAllPops();
+            BasePopupManager.getInst().removeAllPops();
         }
     }
 
@@ -119,7 +145,7 @@ public class WebViewActivity extends BaseBackActivity implements View.OnClickLis
             if (browseweb_webview.canGoBack()) {
                 browseweb_webview.goBack();
             } else {
-                browseweb_webview.loadUrl("about:blank");
+                return super.onKeyDown(keyCode,event);
             }
             return true;
         }
@@ -144,5 +170,10 @@ public class WebViewActivity extends BaseBackActivity implements View.OnClickLis
         super.onDestroy();
         RefWatcher watcher = LuanApplication.getLeak(this);
         watcher.watch(this);
+    }
+
+    @Override
+    public void onRefresh() {
+        browseweb_webview.reload();
     }
 }

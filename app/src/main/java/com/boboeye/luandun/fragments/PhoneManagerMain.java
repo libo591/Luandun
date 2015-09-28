@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.boboeye.luandun.R;
+import com.boboeye.luandun.activitys.SpaceCleanerActivity;
 import com.boboeye.luandun.activitys.ProcessActivity;
 import com.boboeye.luandun.adapter.PhoneManageAdapter;
 import com.boboeye.luandun.base.BaseController;
@@ -53,6 +54,9 @@ public class PhoneManagerMain extends BaseListFragment{
         String manID=pmm.getId();
         if(PhoneManageController.MAN_PROCESS.equals(manID)){
             Intent intent = new Intent(this.getActivity(), ProcessActivity.class);
+            this.getActivity().startActivity(intent);
+        }else if(PhoneManageController.MAN_CLEANROM.equals(manID)){
+            Intent intent = new Intent(this.getActivity(), SpaceCleanerActivity.class);
             this.getActivity().startActivity(intent);
         }
     }

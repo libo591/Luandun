@@ -32,6 +32,7 @@ public class AccountManageFragment extends BaseListFragment implements View.OnCl
     private static final String TAG = AccountManageFragment.class.getSimpleName();
     private View popInputView;
     private View popInfoView;
+    private EditText popInfoView_type;
     private EditText popInfoView_Name;
     private EditText popInfoView_Pass;
     private Button popInfoView_Submit;
@@ -115,35 +116,40 @@ public class AccountManageFragment extends BaseListFragment implements View.OnCl
             popInfoView_Cancel = (Button) popInfoView.findViewById(R.id.pass_popview_cancel);
             popInfoView_Submit.setOnClickListener(this);
             popInfoView_Cancel.setOnClickListener(this);
+            popInfoView_type = (EditText) popInfoView.findViewById(R.id.pass_popview_type);
             popInfoView_Name = (EditText) popInfoView.findViewById(R.id.pass_popview_name);
             popInfoView_Pass = (EditText) popInfoView.findViewById(R.id.pass_popview_pass);
         }
 
         if(pm!=null) {
-            EditText typeET = (EditText) popInfoView.findViewById(R.id.pass_popview_type);
-            //typeET.setText(pm.getType());
+            popInfoView_type.setText(pm.getType());
             popInfoView_Name.setText(pm.getName());
             try {
                 popInfoView_Pass.setText(CipherUtils.decrypt(pm.getPassword(), CipherUtils.getDESKey(AccountController.getInst().getCipherKey().getBytes()), "DES"));
-            }catch(Exception e){e.printStackTrace();}
+            }catch(Exception e){
+                e.printStackTrace();
+                Toast.makeText(getActivity(),"密码解析错误",Toast.LENGTH_SHORT).show();
+                return;
+            }
         }else{
+            popInfoView_type.setText("");
             popInfoView_Name.setText("");
             popInfoView_Pass.setText("");
         }
         if(inEdit){
-            //typeET.setEnabled(true);
+            popInfoView_type.setEnabled(true);
             popInfoView_Name.setEnabled(true);
             popInfoView_Pass.setEnabled(true);
             popInfoView_Submit.setVisibility(View.VISIBLE);
             popInfoView_Cancel.setVisibility(View.VISIBLE);
         }else{
-            //typeET.setEnabled(false);
+            popInfoView_type.setEnabled(false);
             popInfoView_Name.setEnabled(false);
             popInfoView_Pass.setEnabled(false);
             popInfoView_Submit.setVisibility(View.GONE);
             popInfoView_Cancel.setVisibility(View.GONE);
         }
-        BasePopupManager.addPopup(popInfoView, getActivity().getWindow(), Gravity.BOTTOM,
+        BasePopupManager.getInst().addPopup(popInfoView, getActivity().getWindow(), Gravity.BOTTOM,
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
@@ -154,7 +160,7 @@ public class AccountManageFragment extends BaseListFragment implements View.OnCl
         ((EditText)popInputView.findViewById(R.id.pass_inputkey)).setText("");
         popInputView.findViewById(R.id.pass_inputkey_submit).setOnClickListener(this);
         popInputView.findViewById(R.id.pass_inputkey_cancel).setOnClickListener(this);
-        BasePopupManager.addPopup(popInputView, getActivity().getWindow(), Gravity.BOTTOM,
+        BasePopupManager.getInst().addPopup(popInputView, getActivity().getWindow(), Gravity.BOTTOM,
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
@@ -162,11 +168,19 @@ public class AccountManageFragment extends BaseListFragment implements View.OnCl
     public void onClick(View v) {
         if(v.getId()==R.id.pass_inputkey_submit){
             String inputKey = ((EditText)popInputView.findViewById(R.id.pass_inputkey)).getText().toString();
+            if(TextUtils.isEmpty(inputKey)){
+                Toast.makeText(getActivity(),"未输入任何密码",Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(inputKey.length()<10){
+                Toast.makeText(getActivity(),"口令须在10位以上",Toast.LENGTH_SHORT).show();
+                return;
+            }
             AccountController.getInst().setCipherKey(inputKey);
-            BasePopupManager.removePop(popInputView);
+            BasePopupManager.getInst().removePop(popInputView);
             showInputView();
         }else if(v.getId()==R.id.pass_inputkey_cancel){
-            BasePopupManager.removePop(popInputView);
+            BasePopupManager.getInst().removePop(popInputView);
         }else if(v.getId()==R.id.pass_popview_submit){
             String pass = popInfoView_Pass.getText().toString();
             try {
@@ -175,6 +189,7 @@ public class AccountManageFragment extends BaseListFragment implements View.OnCl
                 e.printStackTrace();
             }
             if(pm!=null) {
+                pm.setType(popInfoView_type.getText().toString());
                 pm.setName(popInfoView_Name.getText().toString());
                 pm.setPassword(pass);
                 AccountController.getInst().edit(pm);
@@ -183,13 +198,13 @@ public class AccountManageFragment extends BaseListFragment implements View.OnCl
                 pm.setId(System.currentTimeMillis()+"");
                 pm.setName(popInfoView_Name.getText().toString());
                 pm.setPassword(pass);
-                pm.setType(0);
+                pm.setType(popInfoView_type.getText().toString());
                 AccountController.getInst().add(pm);
             }
-            BasePopupManager.removePop(popInfoView);
+            BasePopupManager.getInst().removePop(popInfoView);
             this.onRefresh();
         }else if(v.getId()==R.id.pass_popview_cancel) {
-            BasePopupManager.removePop(popInfoView);
+            BasePopupManager.getInst().removePop(popInfoView);
         }
     }
 }

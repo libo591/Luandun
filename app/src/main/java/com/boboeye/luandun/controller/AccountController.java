@@ -58,6 +58,7 @@ public class AccountController extends BaseListController {
             key = CipherUtils.getDESKey(mKey.getBytes());
         } catch (Exception e) {
             e.printStackTrace();
+            key = null;
         }
         return key;
     }

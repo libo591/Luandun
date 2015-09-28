@@ -5,24 +5,53 @@
     <color name="day_colorPrimary">#40AA53</color>
     <color name="day_colorPrimaryDark">#0b751e</color>
     <color name="day_textColor">#333333</color>
-    <color name="day_infoTextColor">#999999</color>
     <color name="day_layout_bg_normal">#f6f6f6</color>
     <color name="day_layout_bg_pressed">#dfdfdf</color>
     <color name="day_line_color">#e7e7e7</color>
     <color name="day_windows_bg">#fafafa</color>
-    <color name="day_edit_color">#333333</color>
-    <color name="day_edit_hit_color">#999999</color>
 
     <!-- night -->
     <color name="night_colorPrimary">#008000</color>
     <color name="night_colorPrimaryDark">#0b751e</color>
     <color name="night_textColor">#b3b3b3</color>
-    <color name="night_infoTextColor">#666666</color>
     <color name="night_layout_bg_normal">#222222</color>
     <color name="night_layout_bg_pressed">#0d0e11</color>
     <color name="night_line_color">#282828</color>
     <color name="night_windows_bg">#1f1f1f</color>
-    <color name="night_edit_color">#666666</color>
-    <color name="night_edit_hit_color">#999999</color>
 
+    <!-- darkblue -->
+    <color name="darkblue_colorPrimary">#6699FF</color>
+    <color name="darkblue_colorPrimaryDark">#0000FF</color>
+    <color name="darkblue_textColor">#333333</color>
+    <color name="darkblue_layout_bg_normal">#CCFFFF</color>
+    <color name="darkblue_layout_bg_pressed">#99CCFF</color>
+    <color name="darkblue_line_color">#66CCFF</color>
+    <color name="darkblue_windows_bg">#CCFFFF</color>
+
+    <!-- lightblue -->
+    <color name="lightblue_colorPrimary">#99CCFF</color>
+    <color name="lightblue_colorPrimaryDark">#6699FF</color>
+    <color name="lightblue_textColor">#333333</color>
+    <color name="lightblue_layout_bg_normal">#CCFFFF</color>
+    <color name="lightblue_layout_bg_pressed">#99CCFF</color>
+    <color name="lightblue_line_color">#66CCFF</color>
+    <color name="lightblue_windows_bg">#CCFFFF</color>
+
+    <!-- red -->
+    <color name="red_colorPrimary">#FF0033</color>
+    <color name="red_colorPrimaryDark">#990033</color>
+    <color name="red_textColor">#333333</color>
+    <color name="red_layout_bg_normal">#FF9999</color>
+    <color name="red_layout_bg_pressed">#FF6666</color>
+    <color name="red_line_color">#CC3333</color>
+    <color name="red_windows_bg">#FF9999</color>
+
+    <!-- pink -->
+    <color name="pink_colorPrimary">#FF9999</color>
+    <color name="pink_colorPrimaryDark">#FF6666</color>
+    <color name="pink_textColor">#333333</color>
+    <color name="pink_layout_bg_normal">#FFCCCC</color>
+    <color name="pink_layout_bg_pressed">#FF6666</color>
+    <color name="pink_line_color">#FF6666</color>
+    <color name="pink_windows_bg">#FFCCCC</color>
 </resources>

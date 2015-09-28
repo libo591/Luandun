@@ -46,7 +46,7 @@ public class CacheLocalModelService extends BaseLocalModelService {
         }
         DiskLruCache cache = null;
         try {
-            cache = DiskLruCache.open(cacheDir, AppConfig.getInst().getAppVersion(), 1, 10 * 1024 * 1024);
+            cache = DiskLruCache.open(cacheDir, AppConfig.getInst().getAppVersion(), 1, 512 * 1024 * 1024);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -93,7 +93,7 @@ public class CacheLocalModelService extends BaseLocalModelService {
         DiskLruCache cache = getLruCache(getCreateFilePath());
         List jsonArray = referDatas();
         jsonArray.addAll(datas);
-        String key = CipherUtils.md5(this.getCacheKey());
+        String key = this.getCacheKey();
         DiskLruCache.Editor editor = null;
         try {
             editor = cache.edit(key);

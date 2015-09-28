@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" android:background="@color/day_colorPrimary">
+    android:layout_height="wrap_content">
     <EditText
         android:id="@+id/pass_popview_type" android:hint="@string/name" style="@style/netinfowindow_edittext"/>
     <EditText

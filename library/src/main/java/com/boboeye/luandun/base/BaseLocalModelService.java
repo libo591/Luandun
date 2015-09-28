@@ -1,5 +1,7 @@
 package com.boboeye.luandun.base;
 
+import android.os.Environment;
+
 import com.boboeye.luandun.AppConfig;
 
 import org.kymjs.kjframe.utils.FileUtils;
@@ -12,9 +14,10 @@ import java.util.List;
 public class BaseLocalModelService {
     public String getBaseFilePath(){
         if(FileUtils.checkSDcard()){
-            return FileUtils.getSDCardPath();
+            return FileUtils.getSDCardPath()+"/luandun/userdata";
         }else{
-            return AppConfig.getInst().getContext().getCacheDir().getPath();
+            return Environment.getDataDirectory()
+                    +"/data/"+AppConfig.getInst().getContext().getPackageName()+"/userdata";
         }
     }
 

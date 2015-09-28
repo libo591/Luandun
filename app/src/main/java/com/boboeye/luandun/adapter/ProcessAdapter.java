@@ -5,11 +5,17 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.boboeye.luandun.R;
 import com.boboeye.luandun.base.BaseListAdapter;
+import com.boboeye.luandun.controller.ProcessController;
 import com.boboeye.luandun.model.impl.ProcessModel;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 
 /**
  * Created by libo_591 on 15/8/22.
@@ -23,24 +29,22 @@ public class ProcessAdapter extends BaseListAdapter {
 
     @Override
     public View getItemView(int position, View convertView, ViewGroup parent) {
+        ProcessModel item = (ProcessModel) getItem(position);
         ViewHolder vh = null;
         if (convertView == null) {
             vh = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.phoneman_process_item,null);
-            vh.name = (TextView)convertView.findViewById(R.id.process_name);
-            vh.state = (TextView)convertView.findViewById(R.id.process_state);
-            vh.memory = (TextView)convertView.findViewById(R.id.process_memory);
+            ButterKnife.inject(vh,convertView);
+            vh.pm = item;
             convertView.setTag(vh);
         }else{
             vh = (ViewHolder)convertView.getTag();
         }
-        if(getDataSize()>position) {
-            ProcessModel item = (ProcessModel) getItem(position);
-            String state = getStateText(item.getImportance());
-            vh.state.setText(state);
-            vh.name.setText(item.getName());
-            vh.memory.setText(item.getMemory()+"K");
-        }
+
+        //String state = getStateText(item.getImportance());
+        vh.name.setText(item.getName());
+        vh.memory.setText(item.getMemory()+"K");
+        vh.icon.setBackgroundDrawable(item.getIcon());
         return convertView;
     }
 
@@ -65,8 +69,18 @@ public class ProcessAdapter extends BaseListAdapter {
     }
 
     class ViewHolder{
+        public ProcessModel pm;
+        @InjectView(R.id.process_name)
         public TextView name;
-        public TextView state;
+        @InjectView(R.id.process_memory)
         public TextView memory;
+        @InjectView(R.id.process_icon)
+        public ImageView icon;
+        @OnClick(R.id.process_kill)
+        public void killProcess(){
+            if(pm!=null) {
+                ProcessController.getInst().killProccess(pm);
+            }
+        }
     }
 }

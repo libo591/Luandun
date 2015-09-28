@@ -11,6 +11,7 @@ public class BaseEvent {
     public static final int TYPE_DELETE  =2;
     public static final int TYPE_ADD     =3;
     public static final int TYPE_AFTERADD=4;
+    public static final int TYPE_REFRESH =5;
 
     private int type=-1;
     private List eventData;

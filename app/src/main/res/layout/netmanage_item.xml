@@ -15,8 +15,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" android:background="@color/transparent">
-        <ImageView
+        <TextView
             android:id="@+id/netitem_option"
+            android:text="@string/option_icon"
             style="@style/netlistitem_image"/>
         <LinearLayout
             android:id="@+id/netitem_optionbox"
@@ -26,14 +27,10 @@
             android:layout_toLeftOf="@id/netitem_option" android:background="?attr/menu_bg">
             <TextView
                 android:id="@+id/netitem_edit"
-                android:text="@string/edit"
-                style="@style/menutextstyle"
-                android:layout_height="match_parent"/>
+                style="@style/netlistitem_image"/>
             <TextView
                 android:id="@+id/netitem_delete"
-                android:text="@string/delete"
-                style="@style/menutextstyle"
-                android:layout_height="match_parent"/>
+                style="@style/netlistitem_image"/>
         </LinearLayout>
     </RelativeLayout>
 </FrameLayout>

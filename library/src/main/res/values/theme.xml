@@ -1,34 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme_Default" parent="Base.Theme.AppCompat.Light">
-        <item name="colorPrimary">@color/day_colorPrimary</item>
-        <item name="colorPrimaryDark">@color/day_colorPrimaryDark</item>
-        <item name="android:textColorLink">#0b9a27</item>
-        <item name="android:textColorPrimary">@color/white</item>
-        <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
-        <item name="android:windowBackground">@color/window_background</item>
-        <item name="actionMenuTextColor">@color/white</item>
-        <item name="android:textColorHint">@color/white</item>
+        <item name="colorPrimary">@color/day_colorPrimary</item><!-- 标题栏背景 -->
+        <item name="colorPrimaryDark">@color/day_colorPrimaryDark</item><!-- 状态栏背景 -->
+        <item name="android:textColorPrimary">@color/day_textColor</item><!-- 标题栏文字 -->
+        <item name="android:windowBackground">@color/day_windows_bg</item><!-- 一般组件的背景 -->
+        <item name="android:textColorHint">@color/day_textColor</item><!-- edittext输入文字颜色 -->
+        <item name="colorAccent">@color/day_colorPrimary</item>
+        <item name="button_bg">@drawable/day_buttonbg</item>
         <item name="menu_bg">@drawable/day_layoutbg</item>
         <item name="menu_line">@color/day_line_color</item>
         <item name="tab_block">@drawable/image_sliding_block</item>
         <item name="window_bg">@color/day_windows_bg</item>
-        <item name="list_bg">@drawable/day_list_bg</item>
-        <item name="android:editTextColor">@color/day_edit_color</item>
+        <!--item name="android:colorAccent"></item--><!-- radio，edit光标＋下划线，滑块等 api 21+ -->
+        <!--item name="android:statusBarColor">@color/day_colorPrimaryDark</item --><!-- 状态栏 api 21+ -->
     </style>
 
     <!-- 夜间模式 -->
     <style name="Theme_Night" parent="@style/Theme.AppCompat">
         <item name="colorPrimary">@color/night_colorPrimary</item>
         <item name="colorPrimaryDark">@color/night_colorPrimaryDark</item>
-        <item name="android:textColorLink">@color/night_colorPrimary</item>
+        <item name="android:textColorPrimary">@color/night_textColor</item>
         <item name="android:windowBackground">@color/night_windows_bg</item>
-        <item name="android:textColorHint">@color/black</item>
+        <item name="android:textColorHint">@color/night_textColor</item>
+        <item name="colorAccent">@color/night_colorPrimary</item>
+        <item name="button_bg">@drawable/night_buttonbg</item>
         <item name="menu_bg">@drawable/night_layoutbg</item>
         <item name="menu_line">@color/night_line_color</item>
         <item name="tab_block">@drawable/night_image_sliding_block</item>
         <item name="window_bg">@color/night_windows_bg</item>
-        <item name="list_bg">@drawable/night_list_bg</item>
-        <item name="android:editTextColor">@color/night_edit_color</item>
+    </style>
+
+    <!-- 深蓝模式 -->
+    <style name="Theme_DarkBlue" parent="@style/Theme.AppCompat">
+        <item name="colorPrimary">@color/darkblue_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/darkblue_colorPrimaryDark</item>
+        <item name="android:textColorPrimary">@color/darkblue_textColor</item>
+        <item name="android:textColor">@color/darkblue_textColor</item>
+        <item name="android:windowBackground">@color/darkblue_windows_bg</item>
+        <item name="android:textColorHint">@color/darkblue_textColor</item>
+        <item name="colorAccent">@color/darkblue_colorPrimary</item>
+        <item name="button_bg">@drawable/darkblue_buttonbg</item>
+        <item name="menu_bg">@drawable/darkblue_layoutbg</item>
+        <item name="menu_line">@color/darkblue_line_color</item>
+        <item name="tab_block">@drawable/darkblue_image_sliding_block</item>
+        <item name="window_bg">@color/darkblue_windows_bg</item>
+    </style>
+
+    <!-- 浅蓝模式 -->
+    <style name="Theme_LightBlue" parent="@style/Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/lightblue_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/lightblue_colorPrimaryDark</item>
+        <item name="android:textColorPrimary">@color/lightblue_textColor</item>
+        <item name="android:textColor">@color/lightblue_textColor</item>
+        <item name="android:windowBackground">@color/lightblue_windows_bg</item>
+        <item name="android:textColorHint">@color/lightblue_textColor</item>
+        <item name="colorAccent">@color/lightblue_colorPrimary</item>
+        <item name="button_bg">@drawable/lightblue_buttonbg</item>
+        <item name="menu_bg">@drawable/lightblue_layoutbg</item>
+        <item name="menu_line">@color/lightblue_line_color</item>
+        <item name="tab_block">@drawable/lightblue_image_sliding_block</item>
+        <item name="window_bg">@color/lightblue_windows_bg</item>
+    </style>
+
+    <!-- 红色模式 -->
+    <style name="Theme_Red" parent="@style/Theme.AppCompat">
+        <item name="colorPrimary">@color/red_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/red_colorPrimaryDark</item>
+        <item name="android:textColorPrimary">@color/red_textColor</item>
+        <item name="android:textColor">@color/red_textColor</item>
+        <item name="android:windowBackground">@color/red_windows_bg</item>
+        <item name="android:textColorHint">@color/red_textColor</item>
+        <item name="colorAccent">@color/red_colorPrimary</item>
+        <item name="button_bg">@drawable/red_buttonbg</item>
+        <item name="menu_bg">@drawable/red_layoutbg</item>
+        <item name="menu_line">@color/red_line_color</item>
+        <item name="tab_block">@drawable/red_image_sliding_block</item>
+        <item name="window_bg">@color/red_windows_bg</item>
+    </style>
+
+    <!-- 粉色模式 -->
+    <style name="Theme_Pink" parent="@style/Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/pink_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/pink_colorPrimaryDark</item>
+        <item name="android:textColorPrimary">@color/pink_textColor</item>
+        <item name="android:textColor">@color/pink_textColor</item>
+        <item name="android:windowBackground">@color/pink_windows_bg</item>
+        <item name="android:textColorHint">@color/pink_textColor</item>
+        <item name="colorAccent">@color/pink_colorPrimary</item>
+        <item name="button_bg">@drawable/pink_buttonbg</item>
+        <item name="menu_bg">@drawable/pink_layoutbg</item>
+        <item name="menu_line">@color/pink_line_color</item>
+        <item name="tab_block">@drawable/pink_image_sliding_block</item>
+        <item name="window_bg">@color/pink_windows_bg</item>
     </style>
 </resources>

@@ -1,5 +1,7 @@
 package com.boboeye.luandun.base;
 
+import android.support.v4.util.SimpleArrayMap;
+
 import org.apache.http.NameValuePair;
 
 import java.io.File;
@@ -51,6 +53,7 @@ public class BaseNetWorkModelService {
     public BaseModel referData(String url,List<NameValuePair> pairs){return null;}
     public List<BaseModel> referDatas(List<NameValuePair> pairs){return null;}
     public List<BaseModel> referDatas(String url,List<NameValuePair> pairs){return null;}
+    public List<BaseModel> referDatas(String url,List<NameValuePair> pairs,SimpleArrayMap<String,String> heads){return null;}
 
     public int uploadFiles(List<NameValuePair> pairs,List<File> files){return 0;}
 }

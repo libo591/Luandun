@@ -1,6 +1,7 @@
 package com.boboeye.luandun.base;
 
 import android.os.AsyncTask;
+import android.text.TextUtils;
 import android.util.SparseArray;
 
 import java.lang.reflect.Method;
@@ -73,12 +74,14 @@ public class BaseControllerAsynTaskProxy {
         @Override
         protected void onPostExecute(Object o) {
             try {
-                if(o==null){
-                    Method method = mController.getClass().getDeclaredMethod(methodNameCallBack);
-                    method.invoke(mController);
-                }else{
-                    Method method = mController.getClass().getDeclaredMethod(methodNameCallBack, o.getClass());
-                    method.invoke(mController,o);
+                if (!TextUtils.isEmpty(methodNameCallBack)) {
+                    if (o == null) {
+                        Method method = mController.getClass().getDeclaredMethod(methodNameCallBack);
+                        method.invoke(mController);
+                    } else {
+                        Method method = mController.getClass().getDeclaredMethod(methodNameCallBack, o.getClass());
+                        method.invoke(mController, o);
+                    }
                 }
 
             } catch (Exception e) {

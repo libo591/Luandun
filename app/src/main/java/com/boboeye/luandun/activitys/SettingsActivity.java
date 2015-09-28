@@ -1,6 +1,7 @@
 package com.boboeye.luandun.activitys;
 
 import android.os.Bundle;
+import android.view.WindowManager;
 
 import com.boboeye.luandun.R;
 import com.boboeye.luandun.base.BaseBackActivity;
@@ -18,5 +19,6 @@ public class SettingsActivity extends BaseBackActivity {
     public void initViews(Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
         getSupportActionBar().setTitle("设置");
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 }

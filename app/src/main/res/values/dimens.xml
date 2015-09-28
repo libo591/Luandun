@@ -5,4 +5,5 @@
     <dimen name="normal_h_margin">8dp</dimen>
     <dimen name="normal_v_margin">8dp</dimen>
     <dimen name="menu_textsize">16dp</dimen>
+    <dimen name="menu_textsizebig">24dp</dimen>
 </resources>

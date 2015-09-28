@@ -4,8 +4,8 @@
     <LinearLayout
         android:id="@+id/menu_dis"
         style="@style/menuitemlayout">
-        <ImageView
-            style="@style/menuimagestyle" android:src="@drawable/drawer_menu_icon_blog_nor" />
+        <TextView android:id="@+id/menu_discover_icon" style="@style/menutextstyle"
+            android:text="@string/discover_icon"  />
         <TextView style="@style/menutextstyle" android:layout_width="match_parent"
             android:text="@string/home_tabhost_discover"  />
     </LinearLayout>
@@ -13,8 +13,8 @@
     <LinearLayout
         android:id="@+id/menu_set"
         style="@style/menuitemlayout">
-        <ImageView
-            style="@style/menuimagestyle" android:src="@drawable/drawer_menu_icon_setting_nor" />
+        <TextView android:id="@+id/menu_set_icon" style="@style/menutextstyle"
+            android:text="@string/set_icon"  />
         <TextView style="@style/menutextstyle" android:layout_width="match_parent"
             android:text="@string/home_tabhost_settings" />
     </LinearLayout>
@@ -22,8 +22,8 @@
     <LinearLayout
         android:id="@+id/menu_theme"
         style="@style/menuitemlayout">
-        <ImageView
-            style="@style/menuimagestyle" android:src="@drawable/drawer_menu_icon_night_nor" />
+        <TextView android:id="@+id/menu_theme_icon" style="@style/menutextstyle"
+            android:text="@string/menu_theme"  />
         <TextView style="@style/menutextstyle" android:layout_width="match_parent"
             android:text="@string/home_tabhost_theme" />
     </LinearLayout>

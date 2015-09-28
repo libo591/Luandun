@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" style="@style/phonelistitem">
-    <ImageView
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@drawable/layers"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="@dimen/normal_h_margin" />
+    <TextView
+        android:id="@+id/pm_mainitem_icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:gravity="center" />
     <TextView
         android:id="@+id/pm_mainitem_text"
         style="@style/phonelistitem_text" >

@@ -86,13 +86,11 @@
         <item name="android:gravity">center_vertical</item>
     </style>
     <style name="netlistitem_image">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_centerInParent">true</item>
-        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:layout_alignParentRight">true</item>
-        <item name="android:background">@android:drawable/ic_menu_more</item>
-        <item name="android:scaleType">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/menu_textsize</item>
     </style>
     <style name="netinfowindow_edittext">
         <item name="android:layout_width">match_parent</item>
@@ -105,8 +103,7 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:textColor">?attr/colorPrimary</item>
-        <item name="android:background">?attr/menu_bg</item>
+        <item name="android:background">?attr/button_bg</item>
         <item name="android:layout_margin">2dp</item>
     </style>
 
@@ -125,11 +122,61 @@
         <item name="android:textSize">@dimen/menu_textsize</item>
         <item name="android:gravity">center_vertical</item>
     </style>
-
+    <style name="passitem_text">
+        <item name="android:layout_margin">@dimen/normal_h_margin</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/menu_textsize</item>
+    </style>
     <style name="passitem_button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">?attr/colorPrimary</item>
         <item name="android:layout_marginRight">8dp</item>
+    </style>
+
+    <style name="setting_title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+    <style name="setting_content" parent="setting_title">
+        <item name="android:textSize">14dp</item>
+    </style>
+    <style name="normalicon">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:focusable">false</item>
+        <item name="android:layout_marginLeft">@dimen/normal_h_margin</item>
+    </style>
+
+    <style name="clean_button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:background">?attr/button_bg</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+
+    <style name="tulinglistitem_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minWidth">30dp</item>
+        <item name="android:minHeight">30dp</item>
+        <item name="android:layout_marginLeft">@dimen/normal_h_margin</item>
+        <item name="android:layout_marginRight">@dimen/normal_h_margin</item>
+        <item name="android:textSize">@dimen/menu_textsize</item>
+    </style>
+
+    <style name="themelistitem_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:textSize">@dimen/menu_textsize</item>
+        <item name="android:gravity">center</item>
+
     </style>
 </resources>

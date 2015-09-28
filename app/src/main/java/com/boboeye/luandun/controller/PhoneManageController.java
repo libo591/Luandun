@@ -1,5 +1,6 @@
 package com.boboeye.luandun.controller;
 
+import com.boboeye.luandun.R;
 import com.boboeye.luandun.base.BaseListController;
 import com.boboeye.luandun.event.PhoneManageEvent;
 import com.boboeye.luandun.model.impl.PhoneManageModel;
@@ -12,6 +13,8 @@ import java.util.List;
  */
 public class PhoneManageController extends BaseListController {
     public static final String MAN_PROCESS= "0";
+    public static final String MAN_CLEANROM= "1";
+
     private static PhoneManageController _inst = new PhoneManageController();
     private PhoneManageController(){}
     public static PhoneManageController getInst(){
@@ -19,12 +22,14 @@ public class PhoneManageController extends BaseListController {
     }
     @Override
     protected void requestSomePage(int index, int count) {
-        String[] strs = {"进程监控"};
+        String[] strs = {"进程监控","空间清理"};
+        int[] icons = {R.string.process_icon,R.string.space_icon};
         List<PhoneManageModel> models = new ArrayList<PhoneManageModel>();
         int len = strs.length;
         for(int i=0;i<len;i++){
             PhoneManageModel pmm = new PhoneManageModel();
             pmm.setId(i+"");
+            pmm.setIcon(icons[i]);
             pmm.setName(strs[i]);
             models.add(pmm);
         }

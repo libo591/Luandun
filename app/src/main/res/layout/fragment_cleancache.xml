@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout android:id="@+id/spaceclean_refreshlayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent">
+        <ListView android:id="@+id/autostart_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="?attr/menu_line" android:dividerHeight="1dp"
+            android:background="?attr/menu_bg" android:descendantFocusability="blocksDescendants">
+
+        </ListView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button android:id="@+id/cleaner_button"
+                android:text="@string/cleanall" style="@style/clean_button" android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+    </FrameLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

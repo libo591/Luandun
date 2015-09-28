@@ -27,6 +27,8 @@ import com.squareup.leakcanary.RefWatcher;
 
 import org.kymjs.kjframe.utils.CipherUtils;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import de.greenrobot.event.Subscribe;
 
 /**
@@ -40,6 +42,7 @@ public class WebSiteListFragment extends BaseListFragment
     private View modelView;
     private EditText modelViewTitle;
     private EditText modelViewUrl;
+
     private WebSiteController mWebSiteController = WebSiteController.getInst();
     @Override
     public int getContentLayout() {
@@ -98,17 +101,17 @@ public class WebSiteListFragment extends BaseListFragment
                 nm.setTitle(modelViewTitle.getText().toString());
                 nm.setUrl(url);
                 nm.setIcon(UrlUtil.getFaviconIconUrl(url));
-                BasePopupManager.removePop(modelView);
+                BasePopupManager.getInst().removePop(modelView);
                 mWebSiteController.add(nm);
             }else{
                 nm.setTitle(modelViewTitle.getText().toString());
                 nm.setUrl(url);
                 nm.setIcon(UrlUtil.getFaviconIconUrl(url));
-                BasePopupManager.removePop(modelView);
+                BasePopupManager.getInst().removePop(modelView);
                 mWebSiteController.edit(nm);
             }
         }else if(viewid==R.id.netmodelview_cancel){
-            BasePopupManager.removePop(modelView);
+            BasePopupManager.getInst().removePop(modelView);
         }
     }
 
@@ -127,11 +130,9 @@ public class WebSiteListFragment extends BaseListFragment
                 operPosition = -1;
                 modelViewTitle.setText("");
                 modelViewUrl.setText("");
-                BasePopupManager.addPopup(modelView,getActivity().getWindow(), Gravity.BOTTOM,
-                        ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                BasePopupManager.getInst().addPopup(modelView, getActivity().getWindow(), Gravity.BOTTOM,
+                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             }
-        }else if(ne.getType()== WebSiteEvent.TYPE_BASELIST){
-            super.onEventBasic(ne);
         }else if(ne.getType()== WebSiteEvent.TYPE_AFTERADD){
             String msg = "添加成功";
             Toast.makeText(this.getActivity(), msg, Toast.LENGTH_SHORT).show();
@@ -141,8 +142,10 @@ public class WebSiteListFragment extends BaseListFragment
             WebSiteModel netModel = (WebSiteModel)mAdapter.getItem(operPosition);
             modelViewTitle.setText(netModel.getTitle());
             modelViewUrl.setText(netModel.getUrl());
-            BasePopupManager.addPopup(modelView, getActivity().getWindow(), Gravity.BOTTOM,
+            BasePopupManager.getInst().addPopup(modelView, getActivity().getWindow(), Gravity.BOTTOM,
                     ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        }else{
+            super.onEventBasic(ne);
         }
     }
 

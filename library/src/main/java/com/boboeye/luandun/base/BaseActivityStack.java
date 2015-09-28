@@ -84,8 +84,15 @@ public class BaseActivityStack {
 
     public Activity getLast(){
         int len = stack.size();
+        return getSome(len-1);
+    }
+    public Activity getFirst(){
+        return getSome(0);
+    }
+    public Activity getSome(int index){
+        int len = stack.size();
         if(len>0){
-            return stack.get(len-1);
+            return stack.get(index);
         }
         return null;
     }

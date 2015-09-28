@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/tulingitem_inputll"
+        android:layout_width="match_parent"
+        android:layout_height="48dp" android:orientation="horizontal"
+        android:background="@drawable/tulinginput_back" android:layout_alignParentBottom="true">
+        <EditText
+            android:id="@+id/tulingitem_input"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8"/>
+        <TextView
+            android:id="@+id/tulingitem_submit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2" android:gravity="center"
+            android:textSize="@dimen/menu_textsizebig"/>
+    </LinearLayout>
+    <android.support.v4.widget.SwipeRefreshLayout android:id="@+id/tuling_refreshlayout"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:layout_marginBottom="48dp" android:layout_alignParentTop="true" android:background="?attr/window_bg">
+        <ListView android:id="@+id/tulinglistview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="?attr/menu_line"
+            android:dividerHeight="2dp"
+            android:descendantFocusability="blocksDescendants"
+            android:listSelector="@color/transparent">
+        </ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</RelativeLayout>

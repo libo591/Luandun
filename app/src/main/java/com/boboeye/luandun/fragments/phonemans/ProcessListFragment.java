@@ -2,6 +2,7 @@ package com.boboeye.luandun.fragments.phonemans;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -17,12 +18,16 @@ import com.boboeye.luandun.event.ProcessEvent;
 import com.boboeye.luandun.model.impl.ProcessModel;
 import com.squareup.leakcanary.RefWatcher;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import de.greenrobot.event.Subscribe;
 
 /**
  * Created by libo_591 on 15/8/22.
  */
-public class ProcessListFragment extends BaseListFragment {
+public class ProcessListFragment extends BaseListFragment implements SwipeRefreshLayout.OnRefreshListener {
+    @InjectView(R.id.process_refreshlayout)
+    public SwipeRefreshLayout process_refresh;
     @Override
     public int getContentLayout() {
         return R.layout.phoneman_process;
@@ -43,27 +48,28 @@ public class ProcessListFragment extends BaseListFragment {
         return ProcessController.getInst();
     }
 
-    @Subscribe
-    public void onEventMainThread(ProcessEvent event){
-        super.onEventBasic(event);
+    @Override
+    public void initViews(View view) {
+        super.initViews(view);
+        ButterKnife.inject(this, view);
+        process_refresh.setColorSchemeResources(R.color.day_colorPrimary);
+        process_refresh.setOnRefreshListener(this);
     }
 
-    @Override
-    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        ProcessModel pm = (ProcessModel) mAdapter.getItem(position);
-        Context ctx = AppConfig.getInst().getContext();
-        ActivityManager am = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
-        try {
-            am.killBackgroundProcesses(pm.getPackageName());
-        }catch(Throwable e){
-            e.printStackTrace();
+    @Subscribe
+    public void onEventMainThread(ProcessEvent event){
+        if(event.getType()==ProcessEvent.TYPE_DELETE){
+            onRefresh();
+        }else{
+            super.onEventBasic(event);
+            process_refresh.setRefreshing(false);
         }
-        this.onRefresh();
-        return true;
     }
+
 
     @Override
     public void onDestroy() {
+        ButterKnife.reset(this);
         super.onDestroy();
         RefWatcher watcher = LuanApplication.getLeak(this.getActivity());
         watcher.watch(this);

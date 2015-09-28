@@ -1,0 +1,8 @@
+[
+  {"name":"默认(绿色)模式","preview":"#40AA53","textcolor":"#333333","style":"Theme_Default"},
+  {"name":"夜间模式","preview":"#008000","textcolor":"#b3b3b3","style":"Theme_Night"},
+  {"name":"深蓝模式","preview":"#6699FF","textcolor":"#333333","style":"Theme_DarkBlue"},
+  {"name":"浅蓝模式","preview":"#99CCFF","textcolor":"#333333","style":"Theme_LightBlue"},
+  {"name":"红色模式","preview":"#FF0033","textcolor":"#333333","style":"Theme_Red"},
+  {"name":"粉色模式","preview":"#FF9999","textcolor":"#333333","style":"Theme_Pink"}
+]
