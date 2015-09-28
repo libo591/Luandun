@@ -35,6 +35,9 @@ public class Tuling123Controller extends BaseListController {
         int[] dispSize = AppConfig.getInst().getDisplaySize(ctx);
         int count = dispSize[1]/DensityUtils.dip2px(ctx,48);
         count = count-1;
+        if(count%2!=0){
+            count = count-1;
+        }
         setmPageIndex(1);
         setCountPerPage(count);
     }
