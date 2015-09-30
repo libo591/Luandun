@@ -27,9 +27,9 @@ dependencies {
     compile 'de.greenrobot:eventbus:3.0.0-beta1'
     compile 'com.loopj.android:android-async-http:1.4.8'
     compile 'com.jakewharton:disklrucache:2.0.2'
-    compile files('libs/KJFrameForAndroid_v2.223.jar')
     compile 'net.i2p.android.ext:floatingactionbutton:1.10.0'
     compile project(':library')
     androidTestCompile files('libs/robotium-solo-5.0.1.jar')
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3.1'
+    compile 'com.mcxiaoke.volley:library:1.0.19'
 }

@@ -2,16 +2,22 @@ package com.boboeye.luandun.controller;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+import com.boboeye.luandun.AppConfig;
 import com.boboeye.luandun.base.BaseListController;
 import com.boboeye.luandun.base.BaseLocalModelService;
 import com.boboeye.luandun.base.BaseModel;
 import com.boboeye.luandun.event.WebSiteEvent;
 import com.boboeye.luandun.model.impl.WebSiteModel;
+import com.boboeye.luandun.model.service.ImageVolleyModelService;
 import com.boboeye.luandun.model.service.impl.WebSiteModelService;
 import com.boboeye.luandun.utils.UrlUtil;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -26,6 +32,7 @@ public class WebSiteController extends BaseListController {
         return _inst;
     }
     private WebSiteModelService mNetModelService = new WebSiteModelService();
+    private RequestQueue q = Volley.newRequestQueue(AppConfig.getInst().getContext());
 
     //============refer
     public void requestSomePage(int page,int count){
@@ -54,54 +61,74 @@ public class WebSiteController extends BaseListController {
     }
 
     //============edit
-    public void edit(WebSiteModel nm){
+    public void edit(WebSiteModel nm,int pos){
         Log.d(TAG, "edit:" + nm.getId());
-        WebSiteModel[] params = new WebSiteModel[]{nm};
-        Class[] clzs = new Class[]{WebSiteModel.class};
+        Object[] params = new Object[]{nm,pos};
+        Class[] clzs = new Class[]{WebSiteModel.class,int.class};
         doInAsyncTask(this, "realdoEdit", clzs, params, "afterEdit");
     }
 
-    public int realdoEdit(WebSiteModel nm){
+    public List realdoEdit(WebSiteModel nm,int pos){
         BaseLocalModelService localService = this.mNetModelService.getLocalService();
-        return localService.updateData(nm);
+        int result = localService.updateData(nm);
+        if(result==1){
+            List datas = new ArrayList(2);
+            datas.add(pos);
+            datas.add(nm);
+            return datas;
+        }
+        return null;
     }
-    public void afterEdit(Integer state){
-        WebSiteEvent webSiteEvent = new WebSiteEvent(null, WebSiteEvent.TYPE_EDIT);
+    public void afterEdit(ArrayList datas){
+        WebSiteEvent webSiteEvent = new WebSiteEvent(datas, WebSiteEvent.TYPE_EDIT);
         getBus().post(webSiteEvent);
     }
 
     //============delete
-    public void delete(WebSiteModel nm){
+    public void delete(WebSiteModel nm,int pos){
         Log.d(TAG,"delete:"+nm.getId());
-        WebSiteModel[] params = new WebSiteModel[]{nm};
-        Class[] clzs = new Class[]{WebSiteModel.class};
+        Object[] params = new Object[]{nm,pos};
+        Class[] clzs = new Class[]{WebSiteModel.class,int.class};
         doInAsyncTask(this, "realDelete", clzs, params, "afterDelete");
     }
 
-    public int realDelete(WebSiteModel nm){
+    public int realDelete(WebSiteModel nm,int pos){
         BaseLocalModelService localService = this.mNetModelService.getLocalService();
-        return localService.delData(nm);
+        int result = localService.delData(nm);
+        if(result==1){
+            return pos;
+        }
+        return -1;
     }
-    public void afterDelete(Integer state){
-        WebSiteEvent webSiteEvent = new WebSiteEvent(null, WebSiteEvent.TYPE_DELETE);
+    public void afterDelete(Integer pos){
+        List list = new LinkedList();
+        list.add(pos);
+        WebSiteEvent webSiteEvent = new WebSiteEvent(list, WebSiteEvent.TYPE_DELETE);
         getBus().post(webSiteEvent);
     }
 
 
     //========add
     public void add(WebSiteModel nm){
-        Log.d(TAG,"add:"+nm.getId());
+        Log.d(TAG, "add:" + nm.getId());
         WebSiteModel[] params = new WebSiteModel[]{nm};
         Class[] clzs = new Class[]{WebSiteModel.class};
         doInAsyncTask(this, "realAdd", clzs, params, "afterAdd");
     }
 
-    public int realAdd(WebSiteModel nm){
+    public BaseModel realAdd(WebSiteModel nm){
         BaseLocalModelService localService = this.mNetModelService.getLocalService();
-        return localService.createData(nm);
+        int result = localService.createData(nm);
+        if(result==1){
+            return nm;
+        }else{
+            return null;
+        }
     }
-    public void afterAdd(Integer state){
-        WebSiteEvent webSiteEvent = new WebSiteEvent(null, WebSiteEvent.TYPE_AFTERADD);
+    public void afterAdd(WebSiteModel model){
+        List datas = new LinkedList();
+        datas.add(model);
+        WebSiteEvent webSiteEvent = new WebSiteEvent(datas, WebSiteEvent.TYPE_AFTERADD);
         getBus().post(webSiteEvent);
     }
 
@@ -126,5 +153,19 @@ public class WebSiteController extends BaseListController {
             models.add(netmodel);
         }
         return models;
+    }
+
+    public void reqImage(ImageView view,String url,ImageView.ScaleType scaleType,int maxWidth,int maxHeight){
+        ImageVolleyModelService service = new ImageVolleyModelService(this.q);
+        service.setImageParams(view,scaleType,maxWidth,maxHeight);
+        service.referData(url,null);
+    }
+
+    public RequestQueue getQ() {
+        return q;
+    }
+
+    public void setQ(RequestQueue q) {
+        this.q = q;
     }
 }

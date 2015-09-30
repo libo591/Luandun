@@ -18,6 +18,8 @@ import com.boboeye.luandun.event.ProcessEvent;
 import com.boboeye.luandun.model.impl.ProcessModel;
 import com.squareup.leakcanary.RefWatcher;
 
+import java.util.List;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import de.greenrobot.event.Subscribe;
@@ -59,7 +61,11 @@ public class ProcessListFragment extends BaseListFragment implements SwipeRefres
     @Subscribe
     public void onEventMainThread(ProcessEvent event){
         if(event.getType()==ProcessEvent.TYPE_DELETE){
-            onRefresh();
+            List datas = event.getEventData();
+            int position = (Integer)datas.get(0);
+            if(position>=0){
+                mAdapter.removeData(position);
+            }
         }else{
             super.onEventBasic(event);
             process_refresh.setRefreshing(false);

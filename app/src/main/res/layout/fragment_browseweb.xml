@@ -1,56 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.SwipeRefreshLayout android:id="@+id/webview_refresh" xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
-    <RelativeLayout
-        xmlns:fab="http://schemas.android.com/apk/res-auto"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <WebView
-            android:id="@+id/browseweb_webview"
+        <RelativeLayout
+            xmlns:fab="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></WebView>
-        <net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu
-            android:id="@+id/browseweb_fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            fab:fab_addButtonColorNormal="@color/day_colorPrimary"
-            fab:fab_addButtonColorPressed="@color/day_colorPrimaryDark"
-            fab:fab_addButtonSize="mini"
-            fab:fab_addButtonPlusIconColor="@color/day_textColor"
-            fab:fab_expandDirection="left"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginEnd="16dp">
-
-            <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
-                android:id="@+id/browseweb_fab_back"
+            android:layout_height="match_parent">
+            <WebView
+                android:id="@+id/browseweb_webview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></WebView>
+            <net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu
+                android:id="@+id/browseweb_fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                fab:fab_colorNormal="@color/day_colorPrimary"
-                fab:fab_colorPressed="@color/day_colorPrimaryDark"
-                fab:fab_icon="@drawable/arrow_left"
-                fab:fab_size="mini"/>
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                fab:fab_addButtonColorNormal="@color/day_colorPrimary"
+                fab:fab_addButtonColorPressed="@color/day_colorPrimaryDark"
+                fab:fab_addButtonSize="mini"
+                fab:fab_addButtonPlusIconColor="@color/day_textColor"
+                fab:fab_expandDirection="left"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp">
 
-            <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
-                android:id="@+id/browseweb_fab_next"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                fab:fab_colorNormal="@color/day_colorPrimary"
-                fab:fab_colorPressed="@color/day_colorPrimaryDark"
-                fab:fab_icon="@drawable/arrow_right"
-                fab:fab_size="mini"/>
+                <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/browseweb_fab_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    fab:fab_colorNormal="@color/day_colorPrimary"
+                    fab:fab_colorPressed="@color/day_colorPrimaryDark"
+                    fab:fab_icon="@drawable/arrow_left"
+                    fab:fab_size="mini"/>
 
-            <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
-                android:id="@+id/browseweb_fab_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                fab:fab_colorNormal="@color/day_colorPrimary"
-                fab:fab_colorPressed="@color/day_colorPrimaryDark"
-                fab:fab_icon="@drawable/circle_plus"
-                fab:fab_size="mini"/>
+                <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/browseweb_fab_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    fab:fab_colorNormal="@color/day_colorPrimary"
+                    fab:fab_colorPressed="@color/day_colorPrimaryDark"
+                    fab:fab_icon="@drawable/arrow_right"
+                    fab:fab_size="mini"/>
 
-        </net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu>
-    </RelativeLayout>
+                <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/browseweb_fab_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    fab:fab_colorNormal="@color/day_colorPrimary"
+                    fab:fab_colorPressed="@color/day_colorPrimaryDark"
+                    fab:fab_icon="@drawable/circle_plus"
+                    fab:fab_size="mini"/>
+
+            </net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu>
+        </RelativeLayout>
+        <View android:id="@+id/process_bar" android:layout_width="match_parent"
+            android:layout_height="5dp" android:background="@drawable/webview_clip"
+            android:layout_alignParentTop="true" android:visibility="gone" />
+    </FrameLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

@@ -1,28 +1,25 @@
 package com.boboeye.luandun.activitys;
 
 import android.content.res.Configuration;
-import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.boboeye.luandun.AppConfig;
+import com.boboeye.luandun.LuanApplication;
 import com.boboeye.luandun.R;
 import com.boboeye.luandun.base.BaseActivity;
 import com.boboeye.luandun.controller.HomeViewPagerController;
 import com.boboeye.luandun.proxy.DrawerLayoutProxy;
+import com.squareup.leakcanary.RefWatcher;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnClick;
 
 public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = HomeActivity.class.getSimpleName();
@@ -79,5 +76,12 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         if (v==menuAdd) {
             HomeViewPagerController.getInst().dispatchAddEvent();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RefWatcher watcher = LuanApplication.getLeak(this);
+        watcher.watch(this);
     }
 }

@@ -20,9 +20,8 @@ import android.widget.PopupWindow;
 
 import com.boboeye.library.R;
 import com.boboeye.luandun.AppConfig;
+import com.boboeye.luandun.utils.DensityUtils;
 
-import org.kymjs.kjframe.utils.DensityUtils;
-import org.kymjs.kjframe.utils.ViewUtils;
 
 /**
  * Created by libo_591 on 15/8/6.

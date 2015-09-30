@@ -5,29 +5,20 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.boboeye.luandun.AppConfig;
 import com.boboeye.luandun.R;
 import com.boboeye.luandun.base.BaseListAdapter;
-import com.boboeye.luandun.controller.Tuling123Controller;
 import com.boboeye.luandun.model.impl.TulingModel;
-
-import org.kymjs.kjframe.utils.DensityUtils;
+import com.boboeye.luandun.utils.DensityUtils;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnClick;
 
 
 /**
@@ -90,7 +81,7 @@ public class TulingListAdapter extends BaseListAdapter {
         int colorBack = typearray.getColor(1, Color.WHITE);
         typearray.recycle();
         GradientDrawable gd = new GradientDrawable(ori,new int[]{colorPrimary, colorBack});
-        int onedp = DensityUtils.dip2px(ctx,1);
+        int onedp = DensityUtils.dip2px(ctx, 1);
         gd.setStroke(onedp,colorPrimary);
         gd.setGradientType(GradientDrawable.LINEAR_GRADIENT);
         gd.setGradientCenter(0.5f, 0.5f);

@@ -12,9 +12,7 @@ import android.widget.TextView;
 import com.boboeye.luandun.R;
 import com.boboeye.luandun.base.BaseListAdapter;
 import com.boboeye.luandun.model.impl.SocialMessage;
-
-import org.kymjs.kjframe.KJBitmap;
-import org.kymjs.kjframe.utils.DensityUtils;
+import com.boboeye.luandun.utils.DensityUtils;
 
 /**
  * Created by libo_591 on 15/7/26.
@@ -51,12 +49,11 @@ public class SocialAdapter extends BaseListAdapter {
         for(int i=0;i<len;i++){
             iv = new ImageView(mContext);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            int margin = DensityUtils.dip2px(mContext,mContext.getResources().getDimension(R.dimen.normal_h_margin));
+            int margin = DensityUtils.dip2px(mContext, mContext.getResources().getDimension(R.dimen.normal_h_margin));
             lp.setMargins(margin, margin, margin, margin);
             iv.setLayoutParams(lp);
             iv.setScaleType(ImageView.ScaleType.FIT_XY);
-            KJBitmap kjbitmap = new KJBitmap();
-            kjbitmap.display(iv,images[i]);
+            //BaseVolleyQueue.getInst().requestImage(iv,);
             vh.social_imagelist.addView(iv);
         }
         return convertView;

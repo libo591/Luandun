@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ListView android:id="@+id/passlist" xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:divider="?attr/menu_line" android:dividerHeight="1dp" android:descendantFocusability="blocksDescendants"
-    android:background="?attr/menu_bg">
-
-</ListView>
+<FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="?attr/window_bg">
+    <ListView android:id="@+id/passlist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="?attr/menu_line" android:dividerHeight="1dp" android:descendantFocusability="blocksDescendants">
+    </ListView>
+    <include layout="@layout/nothingtips" />
+</FrameLayout>

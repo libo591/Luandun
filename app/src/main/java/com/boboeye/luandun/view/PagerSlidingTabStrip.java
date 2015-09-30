@@ -4,6 +4,9 @@ package com.boboeye.luandun.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -208,29 +211,28 @@ public class PagerSlidingTabStrip extends HorizontalScrollView implements
 			return;
 		/* 绘制滑块 */
 		ViewGroup tabsLayout = getTabsLayout();
-		if (tabsLayout != null && tabsLayout.getChildCount() > 0
-				&& slidingBlockDrawable != null) {
-			View currentTab = tabsLayout.getChildAt(currentPosition);
-			if (currentTab != null) {
-				float slidingBlockLeft = currentTab.getLeft();
-				float slidingBlockRight = currentTab.getRight();
-				if (currentPositionOffset > 0f
-						&& currentPosition < tabsLayout.getChildCount() - 1) {
-					View nextTab = tabsLayout.getChildAt(currentPosition + 1);
-					if (nextTab != null) {
-						final float nextTabLeft = nextTab.getLeft();
-						final float nextTabRight = nextTab.getRight();
-						slidingBlockLeft = (currentPositionOffset * nextTabLeft + (1f - currentPositionOffset)
-								* slidingBlockLeft);
-						slidingBlockRight = (currentPositionOffset
-								* nextTabRight + (1f - currentPositionOffset)
-								* slidingBlockRight);
-					}
-				}
-				slidingBlockDrawable.setBounds((int) slidingBlockLeft, 0,
-						(int) slidingBlockRight, getHeight());
-				slidingBlockDrawable.draw(canvas);
-			}
+		if (tabsLayout != null && tabsLayout.getChildCount() > 0&&slidingBlockDrawable != null) {
+            View currentTab = tabsLayout.getChildAt(currentPosition);
+            if (currentTab != null) {
+                float slidingBlockLeft = currentTab.getLeft();
+                float slidingBlockRight = currentTab.getRight();
+                if (currentPositionOffset > 0f
+                        && currentPosition < tabsLayout.getChildCount() - 1) {
+                    View nextTab = tabsLayout.getChildAt(currentPosition + 1);
+                    if (nextTab != null) {
+                        final float nextTabLeft = nextTab.getLeft();
+                        final float nextTabRight = nextTab.getRight();
+                        slidingBlockLeft = (currentPositionOffset * nextTabLeft + (1f - currentPositionOffset)
+                                * slidingBlockLeft);
+                        slidingBlockRight = (currentPositionOffset
+                                * nextTabRight + (1f - currentPositionOffset)
+                                * slidingBlockRight);
+                    }
+                }
+                slidingBlockDrawable.setBounds((int) slidingBlockLeft, 0,
+                        (int) slidingBlockRight, getHeight());
+                slidingBlockDrawable.draw(canvas);
+            }
 		}
 	}
 

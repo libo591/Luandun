@@ -3,8 +3,8 @@ package com.boboeye.luandun.base;
 import android.os.Environment;
 
 import com.boboeye.luandun.AppConfig;
+import com.boboeye.luandun.utils.FileUtils;
 
-import org.kymjs.kjframe.utils.FileUtils;
 
 import java.util.List;
 

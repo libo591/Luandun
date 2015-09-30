@@ -36,6 +36,10 @@ public class BaseListAdapter extends BaseAdapter {
         mDatas.add(data);
         notifyDataSetChanged();
     }
+    public void updateData(BaseModel data,int position){
+        mDatas.set(position,data);
+        notifyDataSetChanged();
+    }
 
     public void removeData(int index){
         mDatas.remove(index);

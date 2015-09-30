@@ -27,7 +27,7 @@ public class HomeTabContentFragment extends BaseFragment {
     public void initViews(View view) {
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.hometabcontent_viewPager);
         HomeTabContentViewPagerAdapter adapter = new HomeTabContentViewPagerAdapter(getChildFragmentManager());
-        viewPager.setOffscreenPageLimit(1);
+        viewPager.setOffscreenPageLimit(2);
         PagerSlidingTabStrip tabstrip = (PagerSlidingTabStrip) view.findViewById(R.id.hometabcontent_tabstrip);
         viewPager.setAdapter(adapter);
         tabstrip.setViewPager(viewPager);

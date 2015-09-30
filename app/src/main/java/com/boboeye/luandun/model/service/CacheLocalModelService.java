@@ -8,7 +8,6 @@ import com.boboeye.luandun.base.BaseLocalModelService;
 import com.boboeye.luandun.base.BaseModel;
 import com.jakewharton.disklrucache.DiskLruCache;
 
-import org.kymjs.kjframe.utils.CipherUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -168,7 +167,7 @@ public class CacheLocalModelService extends BaseLocalModelService {
             DiskLruCache.Snapshot cacheData = cache.get(getCacheKey());
             if(cacheData!=null){
                 String data = cacheData.getString(0);
-                Log.d(TAG,"referDatas:"+data);
+                //Log.d(TAG,"referDatas:"+data);
                 modelList = JSONArray.parseArray(data, getModelClass());
             }else{
                 modelList = new ArrayList();

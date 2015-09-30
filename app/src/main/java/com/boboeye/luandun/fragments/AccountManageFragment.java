@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.boboeye.luandun.R;
@@ -16,13 +17,18 @@ import com.boboeye.luandun.adapter.AccountAdapter;
 import com.boboeye.luandun.base.BaseController;
 import com.boboeye.luandun.base.BaseListAdapter;
 import com.boboeye.luandun.base.BaseListFragment;
+import com.boboeye.luandun.base.BaseModel;
 import com.boboeye.luandun.base.BasePopupManager;
 import com.boboeye.luandun.controller.AccountController;
 import com.boboeye.luandun.event.AccountEvent;
 import com.boboeye.luandun.model.impl.AccountModel;
+import com.boboeye.luandun.utils.CipherUtils;
 
-import org.kymjs.kjframe.utils.CipherUtils;
 
+import java.util.List;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import de.greenrobot.event.Subscribe;
 
 /**
@@ -37,8 +43,11 @@ public class AccountManageFragment extends BaseListFragment implements View.OnCl
     private EditText popInfoView_Pass;
     private Button popInfoView_Submit;
     private Button popInfoView_Cancel;
+    @InjectView(R.id.nothing)
+    public RelativeLayout nothing;
 
     private AccountModel pm;
+    private int pmPos;
     private boolean inEdit;
 
     @Override
@@ -64,29 +73,73 @@ public class AccountManageFragment extends BaseListFragment implements View.OnCl
     @Override
     public void initViews(View view) {
         super.initViews(view);
+        ButterKnife.inject(this,view);
     }
 
     @Subscribe
     public void onEventMainThread(AccountEvent accountEvent) {
         int et = accountEvent.getType();
         if(et== AccountEvent.TYPE_BASELIST) {
-            super.onEventBasic(accountEvent);
+            List datas = accountEvent.getEventData();
+            if(datas!=null&&datas.size()>0) {
+                listViewVisiChange(true);
+                super.onEventBasic(accountEvent);
+            }else{
+                listViewVisiChange(false);
+            }
         }else if(et== AccountEvent.TYPE_DELETE){
-            onRefresh();
-            Toast.makeText(getActivity(),"删除成功",Toast.LENGTH_SHORT).show();
+            List datas = accountEvent.getEventData();
+            int pos = (Integer)datas.get(0);
+            if(pos>=0) {
+                mAdapter.removeData(pos);
+                String msg = "删除成功";
+                Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+            }
+            if(mListView.getChildCount()<=0){
+                listViewVisiChange(false);
+            }else{
+                listViewVisiChange(true);
+            }
         }else if(et== AccountEvent.TYPE_EDIT){
-            onRefresh();
-            Toast.makeText(getActivity(),"修改成功",Toast.LENGTH_SHORT).show();
+            List datas = accountEvent.getEventData();
+            if(datas!=null) {
+                AccountModel am = (AccountModel)datas.get(0);
+                int pos = (Integer)datas.get(1);
+                mAdapter.updateData(am,pos);
+                String msg = "修改成功";
+                Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+            }
         }else if(et== AccountEvent.TYPE_ADD){
             if(!mView.isShown()){
                 return;
             }
             pm = null;
+            pmPos = -1;
             showOrEditItem(true);
         }else if(et== AccountEvent.SHOW_EDIT){
             int pos = (int) accountEvent.getEventData().get(0);
             pm = (AccountModel)mAdapter.getItem(pos);
+            pmPos = pos;
             showOrEditItem(true);
+        }else if(et== AccountEvent.TYPE_AFTERADD){
+            List datas = accountEvent.getEventData();
+            Object am = datas.get(0);
+            if(am!=null&&am instanceof BaseModel) {
+                mAdapter.addData((BaseModel)am);
+                String msg = "添加成功";
+                Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+                listViewVisiChange(true);
+            }
+        }
+    }
+
+    public void listViewVisiChange(boolean show){
+        if(show) {
+            nothing.setVisibility(View.GONE);
+            mListView.setVisibility(View.VISIBLE);
+        }else{
+            nothing.setVisibility(View.VISIBLE);
+            mListView.setVisibility(View.GONE);
         }
     }
 
@@ -95,6 +148,7 @@ public class AccountManageFragment extends BaseListFragment implements View.OnCl
         Log.d(TAG, "onItemClick");
         super.onItemClick(parent, view, position, id);
         pm = (AccountModel) mAdapter.getItem(position);
+        pmPos = position;
         showOrEditItem(false);
     }
     private void showOrEditItem(boolean edit){
@@ -192,7 +246,7 @@ public class AccountManageFragment extends BaseListFragment implements View.OnCl
                 pm.setType(popInfoView_type.getText().toString());
                 pm.setName(popInfoView_Name.getText().toString());
                 pm.setPassword(pass);
-                AccountController.getInst().edit(pm);
+                AccountController.getInst().edit(pm,pmPos);
             }else{
                 pm = new AccountModel();
                 pm.setId(System.currentTimeMillis()+"");
@@ -202,7 +256,6 @@ public class AccountManageFragment extends BaseListFragment implements View.OnCl
                 AccountController.getInst().add(pm);
             }
             BasePopupManager.getInst().removePop(popInfoView);
-            this.onRefresh();
         }else if(v.getId()==R.id.pass_popview_cancel) {
             BasePopupManager.getInst().removePop(popInfoView);
         }

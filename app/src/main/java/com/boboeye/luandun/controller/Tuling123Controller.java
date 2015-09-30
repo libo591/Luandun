@@ -2,7 +2,6 @@ package com.boboeye.luandun.controller;
 
 import android.content.Context;
 import android.support.v4.util.SimpleArrayMap;
-import android.util.Log;
 
 import com.boboeye.luandun.AppConfig;
 import com.boboeye.luandun.base.BaseListController;
@@ -12,15 +11,12 @@ import com.boboeye.luandun.base.BaseNetWorkModelService;
 import com.boboeye.luandun.event.TulingEvent;
 import com.boboeye.luandun.model.impl.TulingModel;
 import com.boboeye.luandun.model.service.impl.TulingModelService;
+import com.boboeye.luandun.utils.DensityUtils;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.kymjs.kjframe.utils.DensityUtils;
-import org.kymjs.kjframe.utils.ViewUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -33,10 +29,10 @@ public class Tuling123Controller extends BaseListController {
     private Tuling123Controller(){
         Context ctx = AppConfig.getInst().getContext();
         int[] dispSize = AppConfig.getInst().getDisplaySize(ctx);
-        int count = dispSize[1]/DensityUtils.dip2px(ctx,48);
+        int count = dispSize[1]/ DensityUtils.dip2px(ctx, 48);
         count = count-1;
         if(count%2!=0){
-            count = count-1;
+            count = count+1;
         }
         setmPageIndex(1);
         setCountPerPage(count);
@@ -67,7 +63,6 @@ public class Tuling123Controller extends BaseListController {
         int start = size-1;
         int end = start-index*count+1;
         end = end<0?0:end;
-        Log.d(TAG,start+"----"+end);
         if(start>0&&end>=0) {
             for (int i = end; i <=start; i++) {
                 result.add(list.get(i));

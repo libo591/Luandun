@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal" android:visibility="gone"
-            android:layout_toLeftOf="@id/netitem_option" android:background="?attr/menu_bg">
+            android:layout_toLeftOf="@id/netitem_option">
             <TextView
                 android:id="@+id/netitem_edit"
                 style="@style/netlistitem_image"/>

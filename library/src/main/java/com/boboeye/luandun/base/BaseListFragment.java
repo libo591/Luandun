@@ -83,10 +83,9 @@ public class BaseListFragment extends BaseFragment implements AbsListView.OnScro
         if(baseEvent.getType()==BaseEvent.TYPE_BASELIST){
             List<BaseModel> models = (List<BaseModel>)baseEvent.getEventData();
             Log.d(TAG, "获取的数据大小:>" + models.size());
-            int pageindex = ((BaseListController)getController()).getmPageIndex();
-            int count = ((BaseListController)getController()).getCountPerPage();
             mAdapter.addDatas(models);
         }else if(baseEvent.getType()==BaseEvent.TYPE_REFRESH){
+            ((BaseListController)getController()).setmPageIndex(1);
             onRefresh();
         }
 

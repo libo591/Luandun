@@ -113,7 +113,7 @@ public class AccountAdapter extends BaseListAdapter {
 
         @OnClick(R.id.passitem_delete)
         public void deleteClick(){
-            AccountController.getInst().delete(am);
+            AccountController.getInst().delete(am,mPosition);
         }
     }
 }

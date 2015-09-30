@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.boboeye.luandun.AppConfig;
 import com.boboeye.luandun.R;
 import com.boboeye.luandun.base.BaseListAdapter;
 import com.boboeye.luandun.controller.ProcessController;
@@ -36,7 +37,10 @@ public class ProcessAdapter extends BaseListAdapter {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.phoneman_process_item,null);
             ButterKnife.inject(vh,convertView);
             vh.pm = item;
+            vh.position = position;
             convertView.setTag(vh);
+            vh.kill.setTypeface(AppConfig.getInst().getTypeFace());
+            vh.kill.setText(R.string.delete_icon);
         }else{
             vh = (ViewHolder)convertView.getTag();
         }
@@ -69,6 +73,7 @@ public class ProcessAdapter extends BaseListAdapter {
     }
 
     class ViewHolder{
+        public int position;
         public ProcessModel pm;
         @InjectView(R.id.process_name)
         public TextView name;
@@ -76,10 +81,12 @@ public class ProcessAdapter extends BaseListAdapter {
         public TextView memory;
         @InjectView(R.id.process_icon)
         public ImageView icon;
+        @InjectView(R.id.process_kill)
+        public TextView kill;
         @OnClick(R.id.process_kill)
         public void killProcess(){
             if(pm!=null) {
-                ProcessController.getInst().killProccess(pm);
+                ProcessController.getInst().killProccess(pm,position);
             }
         }
     }

@@ -15,20 +15,21 @@
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
 }
-.icon-62gongzuokongjian:before { content: "\e61f"; }
-.icon-add:before { content: "\e64f"; }
-.icon-discoverhl:before { content: "\e739"; }
-.icon-iconfontbianji1:before { content: "\e617"; }
-.icon-password:before { content: "\e6a6"; }
-.icon-lock:before { content: "\e608"; }
-.icon-unlock:before { content: "\e612"; }
-.icon-myfill:before { content: "\e62c"; }
-.icon-process:before { content: "\e6ce"; }
-.icon-option:before { content: "\e643"; }
-.icon-iconfontservicefill:before { content: "\e600"; }
-.icon-style:before { content: "\e64d"; }
-.icon-makaicon13:before { content: "\e65c"; }
-.icon-title:before { content: "\e616"; }
-.icon-setting:before { content: "\e602"; }
-.icon-delete:before { content: "\e64c"; }
-.icon-account:before { content: "\e615"; }
+.icon-setting:before { content: "\e600"; }
+.icon-delete:before { content: "\e601"; }
+.icon-62gongzuokongjian:before { content: "\e602"; }
+.icon-add:before { content: "\e603"; }
+.icon-lock:before { content: "\e604"; }
+.icon-unlock:before { content: "\e605"; }
+.icon-iconfontbianji1:before { content: "\e606"; }
+.icon-password:before { content: "\e607"; }
+.icon-option:before { content: "\e608"; }
+.icon-loading:before { content: "\e611"; }
+.icon-myfill:before { content: "\e609"; }
+.icon-makaicon13:before { content: "\e60a"; }
+.icon-process:before { content: "\e60b"; }
+.icon-title:before { content: "\e60c"; }
+.icon-explorehl:before { content: "\e60d"; }
+.icon-account:before { content: "\e60e"; }
+.icon-style:before { content: "\e60f"; }
+.icon-iconfontservicefill:before { content: "\e610"; }

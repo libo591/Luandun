@@ -88,22 +88,27 @@ public class ProcessController extends BaseListController {
 
 
 
-    public void killProccess(ProcessModel pm){
-        Class[] clz = {ProcessModel.class};
-        Object[] obj = {pm};
+    public void killProccess(ProcessModel pm,int position){
+        Class[] clz = {ProcessModel.class,int.class};
+        Object[] obj = {pm,position};
         doInAsyncTask(this,"doKillProcess",clz,obj,"afterKillProcess");
     }
 
-    public void doKillProcess(ProcessModel pm){
+    public int doKillProcess(ProcessModel pm,int position){
         Context ctx = AppConfig.getInst().getContext();
         ActivityManager am = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
+        int result = position;
         try {
             am.killBackgroundProcesses(pm.getPackageName());
         }catch(Throwable e){
             e.printStackTrace();
+            result = -1;
         }
+        return result;
     }
-    public void afterKillProcess(){
-        getBus().post(new ProcessEvent(ProcessEvent.TYPE_DELETE, null));
+    public void afterKillProcess(Integer position){
+        List datas = new ArrayList(1);
+        datas.add(position);
+        getBus().post(new ProcessEvent(ProcessEvent.TYPE_DELETE, datas));
     }
 }

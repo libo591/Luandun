@@ -3,7 +3,6 @@ package com.boboeye.luandun.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +18,7 @@ import com.boboeye.luandun.base.BaseListAdapter;
 import com.boboeye.luandun.controller.WebSiteController;
 import com.boboeye.luandun.event.WebSiteEvent;
 import com.boboeye.luandun.model.impl.WebSiteModel;
-
-import org.kymjs.kjframe.KJBitmap;
+import com.boboeye.luandun.utils.DensityUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +31,11 @@ import butterknife.InjectView;
  */
 public class WebSiteAdapter extends BaseListAdapter {
     private static  final String TAG = "WebSiteAdapter";
+    private int dp24 = 0;
 
     public WebSiteAdapter(Context context) {
         super(context);
+        dp24 = DensityUtils.dip2px(context,24);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class WebSiteAdapter extends BaseListAdapter {
         delete.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                WebSiteController.getInst().delete(netModel);
+                WebSiteController.getInst().delete(netModel,opPos);
                 editor.setVisibility(View.GONE);
             }
         });
@@ -94,11 +94,10 @@ public class WebSiteAdapter extends BaseListAdapter {
 
     private void dispCurrTitleAndIcon(int position, ViewHolder vh) {
         WebSiteModel nm = (WebSiteModel) getItem(position);
-        Log.d(TAG, "net list title=" + nm.getTitle());
         vh.title.setText(nm.getTitle());
-        KJBitmap kb = new KJBitmap();
         if (nm.getIcon() instanceof String) {
-            kb.display(vh.icon, nm.getIcon().toString());
+            WebSiteController.getInst().reqImage(vh.icon,
+                    nm.getIcon().toString(), vh.icon.getScaleType(), dp24, dp24);
         } else {
             vh.icon.setImageBitmap((Bitmap) nm.getIcon());
         }

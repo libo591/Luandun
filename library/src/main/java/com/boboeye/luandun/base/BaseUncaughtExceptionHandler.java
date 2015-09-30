@@ -2,7 +2,8 @@ package com.boboeye.luandun.base;
 
 import android.util.Log;
 
-import org.kymjs.kjframe.utils.FileUtils;
+import com.boboeye.luandun.utils.FileUtils;
+
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;

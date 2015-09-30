@@ -6,4 +6,5 @@ package com.boboeye.luandun.base;
 public class BaseModelService {
     public BaseLocalModelService getLocalService(){return null;}
     public BaseNetWorkModelService getNetService(){return null;}
+    public BaseMemModelService getMemService(){return null;}
 }

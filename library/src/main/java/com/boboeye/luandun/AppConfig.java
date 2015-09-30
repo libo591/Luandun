@@ -1,11 +1,23 @@
 package com.boboeye.luandun;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.TextView;
+
+import com.boboeye.library.R;
+import com.boboeye.luandun.base.BaseActivityStack;
+import com.boboeye.luandun.base.BasePopupManager;
 
 /**
  * Created by libo_591 on 15/8/5.
@@ -54,7 +66,7 @@ public class AppConfig {
 
     public String getPrefer(String key,String defValue){
         SharedPreferences sp = mContext.getSharedPreferences(PREFER_COMMONNAME, Context.MODE_PRIVATE);
-        String value = sp.getString(key,defValue);
+        String value = sp.getString(key, defValue);
         return value;
     }
 

@@ -7,7 +7,7 @@ package com.boboeye.luandun.base;
 public class BaseListController extends BaseController {
     private static final String TAG = "BaseListController";
     /** 当前所展示的页的索引 */
-    protected int mPageIndex   = -1;
+    protected int mPageIndex   = 1;
     protected int countPerPage = 15;
 
     //==================must implement

@@ -6,7 +6,7 @@
         android:id="@+id/tulingitem_inputll"
         android:layout_width="match_parent"
         android:layout_height="48dp" android:orientation="horizontal"
-        android:background="@drawable/tulinginput_back" android:layout_alignParentBottom="true">
+        android:background="?attr/window_bg" android:layout_alignParentBottom="true">
         <EditText
             android:id="@+id/tulingitem_input"
             android:layout_width="0dp"
@@ -19,15 +19,20 @@
             android:layout_weight="2" android:gravity="center"
             android:textSize="@dimen/menu_textsizebig"/>
     </LinearLayout>
-    <android.support.v4.widget.SwipeRefreshLayout android:id="@+id/tuling_refreshlayout"
-        android:layout_width="match_parent" android:layout_height="match_parent"
-        android:layout_marginBottom="48dp" android:layout_alignParentTop="true" android:background="?attr/window_bg">
-        <ListView android:id="@+id/tulinglistview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@color/transparent"
-            android:descendantFocusability="blocksDescendants"
-            android:listSelector="@color/transparent">
-        </ListView>
-    </android.support.v4.widget.SwipeRefreshLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="48dp" android:layout_alignParentTop="true">
+        <android.support.v4.widget.SwipeRefreshLayout android:id="@+id/tuling_refreshlayout"
+            android:layout_width="match_parent" android:layout_height="match_parent" >
+            <ListView android:id="@+id/tulinglistview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@color/transparent"
+                android:descendantFocusability="blocksDescendants"
+                android:listSelector="@color/transparent">
+            </ListView>
+        </android.support.v4.widget.SwipeRefreshLayout>
+        <include layout="@layout/tuling_nothingtips" />
+    </FrameLayout>
 </RelativeLayout>

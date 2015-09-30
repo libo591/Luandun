@@ -1,8 +1,11 @@
 package com.boboeye.luandun.activitys;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.ClipDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -16,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.boboeye.luandun.AppConfig;
 import com.boboeye.luandun.LuanApplication;
 import com.boboeye.luandun.R;
 import com.boboeye.luandun.base.BaseBackActivity;
@@ -24,11 +28,10 @@ import com.boboeye.luandun.base.BasePopupManager;
 import com.boboeye.luandun.controller.WebSiteController;
 import com.boboeye.luandun.event.WebSiteEvent;
 import com.boboeye.luandun.model.impl.WebSiteModel;
+import com.boboeye.luandun.utils.CipherUtils;
 import com.squareup.leakcanary.RefWatcher;
 
 import net.i2p.android.ext.floatingactionbutton.FloatingActionButton;
-
-import org.kymjs.kjframe.utils.CipherUtils;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -38,12 +41,16 @@ import de.greenrobot.event.Subscribe;
  * Created by libo_591 on 15/9/5.
  */
 public class WebViewActivity extends BaseBackActivity implements View.OnClickListener,SwipeRefreshLayout.OnRefreshListener {
+    private static final String TAG = WebViewActivity.class.getSimpleName();
     @InjectView(R.id.browseweb_webview)
     public WebView browseweb_webview;
 
     private View popView;
     @InjectView(R.id.webview_refresh)
     public SwipeRefreshLayout webview_refresh;
+
+    @InjectView(R.id.process_bar)
+    public View processBar;
 
     @Override
     public int getContentLayout() {
@@ -65,6 +72,16 @@ public class WebViewActivity extends BaseBackActivity implements View.OnClickLis
                 return true;
             }
 
+
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                processBar.setVisibility(View.VISIBLE);
+                ClipDrawable clip = (ClipDrawable) processBar.getBackground();
+                clip.setLevel(0);
+            }
+
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
@@ -73,7 +90,8 @@ public class WebViewActivity extends BaseBackActivity implements View.OnClickLis
                     public void run() {
                         webview_refresh.setRefreshing(false);
                     }
-                },100);
+                }, 100);
+                processBar.setVisibility(View.GONE);
             }
         });
         browseweb_webview.setWebChromeClient(new WebChromeClient(){
@@ -81,6 +99,17 @@ public class WebViewActivity extends BaseBackActivity implements View.OnClickLis
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
                 WebViewActivity.this.getSupportActionBar().setTitle(title);
+            }
+
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                if(newProgress==100) {
+                    processBar.setVisibility(View.GONE);
+                }else{
+                    ClipDrawable clip = (ClipDrawable) processBar.getBackground();
+                    clip.setLevel(newProgress*100);
+                }
+                super.onProgressChanged(view,newProgress);
             }
         });
         FloatingActionButton backBtn = (FloatingActionButton)findViewById(R.id.browseweb_fab_back);
@@ -167,6 +196,7 @@ public class WebViewActivity extends BaseBackActivity implements View.OnClickLis
 
     @Override
     protected void onDestroy() {
+        WebSiteController.getInst().getQ().cancelAll(null);
         super.onDestroy();
         RefWatcher watcher = LuanApplication.getLeak(this);
         watcher.watch(this);

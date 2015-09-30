@@ -11,7 +11,6 @@ import com.boboeye.luandun.model.service.CacheLocalModelService;
 public class WebSiteLocalCacheModelService extends CacheLocalModelService {
 
     private static final String TAG = "NetManageModelService";
-    private WebSiteController _controller = WebSiteController.getInst();
 
     /**
      * 缓存的key值，一般比如列表用缓存保存最后一次请求页面数据，会存到一个缓存文件中，此key用于得到此缓存文件
