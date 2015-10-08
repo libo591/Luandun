@@ -1,15 +1,13 @@
 package com.boboeye.luandun.base;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.squareup.leakcanary.RefWatcher;
 
 /**
  * Created by libo_591 on 15/7/25.
@@ -24,7 +22,6 @@ public class BaseFragment extends Fragment {
     }
     //=============must implements=============
 
-    //=============option implements=============
     public BaseController getController(){return null;}
 
     public void initViews(View view) {
@@ -40,7 +37,6 @@ public class BaseFragment extends Fragment {
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event){return false;}
-    //=============option implements=============
 
 
     @Nullable

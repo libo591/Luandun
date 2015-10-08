@@ -25,9 +25,7 @@ import java.util.List;
 
 /**
  * 专为ViewPager定制的滑动选项卡 HOME
- * 
- * @version 1.3.0
- * @author Peng fei Pan
+ *
  */
 public class PagerSlidingTabStrip extends HorizontalScrollView implements
 		View.OnClickListener {

@@ -5,6 +5,8 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +53,7 @@ public class TulingListAdapter extends BaseListAdapter {
             }else{
                 vh.talkitem.setBackgroundDrawable(tulinggd);
             }
+            vh.message.setText(Html.fromHtml(tm.getMsg()));
         }else{
             GradientDrawable usergd = createGradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP);
             vh.image.setText(R.string.my_icon);
@@ -59,8 +62,9 @@ public class TulingListAdapter extends BaseListAdapter {
             }else{
                 vh.talkitem.setBackgroundDrawable(usergd);
             }
+            vh.message.setText(tm.getMsg());
         }
-        vh.message.setText(tm.getMsg());
+        vh.message.setMovementMethod(LinkMovementMethod.getInstance());
         return convertView;
     }
     class ViewHolder{

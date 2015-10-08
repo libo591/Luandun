@@ -126,6 +126,16 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/menu_textsize</item>
     </style>
+    <style name="passitem_content">
+        <item name="android:layout_margin">@dimen/normal_h_margin</item>
+        <item name="android:layout_marginRight">64dp</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/menu_textsize</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">middle</item>
+    </style>
     <style name="passitem_button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

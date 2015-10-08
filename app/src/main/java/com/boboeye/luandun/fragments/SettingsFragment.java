@@ -27,6 +27,12 @@ import de.greenrobot.event.Subscribe;
  * Created by libo_591 on 15/9/7.
  */
 public class SettingsFragment extends BaseListFragment {
+    @InjectView(R.id.settings_maintitle_title)
+    public TextView maintitle;
+    @InjectView(R.id.settings_maintitle_edittext)
+    public EditText maintitle_edittext;
+    @InjectView(R.id.settings_maintitle_lock)
+    public TextView maintitle_toggle;
     @Override
     public int getContentLayout() {
         return R.layout.settings_list;
@@ -53,12 +59,7 @@ public class SettingsFragment extends BaseListFragment {
             super.onEventBasic(event);
         }
     }
-    @InjectView(R.id.settings_maintitle_title)
-    public TextView maintitle;
-    @InjectView(R.id.settings_maintitle_edittext)
-    public EditText maintitle_edittext;
-    @InjectView(R.id.settings_maintitle_lock)
-    public TextView maintitle_toggle;
+
 
     @Override
     public void initViews(View view) {

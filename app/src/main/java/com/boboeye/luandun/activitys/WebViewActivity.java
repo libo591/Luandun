@@ -2,10 +2,11 @@ package com.boboeye.luandun.activitys;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.ClipDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -17,9 +18,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.boboeye.luandun.AppConfig;
 import com.boboeye.luandun.LuanApplication;
 import com.boboeye.luandun.R;
 import com.boboeye.luandun.base.BaseBackActivity;
@@ -61,10 +60,13 @@ public class WebViewActivity extends BaseBackActivity implements View.OnClickLis
     public void initViews(Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
         ButterKnife.inject(this);
-        browseweb_webview.setWillNotCacheDrawing(true);
-        browseweb_webview.setInitialScale(100);
-        WebSettings wbSet = browseweb_webview.getSettings();
-        wbSet.setJavaScriptEnabled(true);
+        //browseweb_webview.setInitialScale(100);
+        browseweb_webview.getSettings().setJavaScriptEnabled(true);
+        browseweb_webview.getSettings().setSupportZoom(true);
+        browseweb_webview.getSettings().setBuiltInZoomControls(true);
+        browseweb_webview.getSettings().setUseWideViewPort(true);
+        browseweb_webview.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+        browseweb_webview.getSettings().setLoadWithOverviewMode(true);
         browseweb_webview.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -127,7 +129,15 @@ public class WebViewActivity extends BaseBackActivity implements View.OnClickLis
     public void initData(Bundle savedInstanceState) {
         super.initData(savedInstanceState);
         Bundle bundle = getIntent().getExtras();
-        String url = bundle.getString("url");
+        String url = "";
+        if(bundle!=null) {
+            url = bundle.getString("url");
+        }
+        if(TextUtils.isEmpty(url)){
+            Uri uri = getIntent().getData();
+            url = uri.getQueryParameter("url");
+        }
+
         browseweb_webview.loadUrl(url);
     }
 
@@ -183,10 +193,6 @@ public class WebViewActivity extends BaseBackActivity implements View.OnClickLis
 
     @Subscribe
     public void onEventMainThread(WebSiteEvent ne){
-        if(ne.getType()== WebSiteEvent.TYPE_ADD){
-            String msg = "添加成功";
-            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-        }
     }
 
     @Override
@@ -196,7 +202,6 @@ public class WebViewActivity extends BaseBackActivity implements View.OnClickLis
 
     @Override
     protected void onDestroy() {
-        WebSiteController.getInst().getQ().cancelAll(null);
         super.onDestroy();
         RefWatcher watcher = LuanApplication.getLeak(this);
         watcher.watch(this);

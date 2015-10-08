@@ -12,8 +12,13 @@ import com.boboeye.luandun.AppConfig;
 import com.boboeye.library.R;
 
 public class BaseActivity extends ActionBarActivity {
-
+    //==========must implement===========
+    public int getContentLayout(){
+        return 0;
+    }
+    //==========must implement===========
     public BaseController getController(){return null;}
+    public int getMenuLayout(){return 0;}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,13 +75,8 @@ public class BaseActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //==========must implement===========
-    public int getContentLayout(){
-        return 0;
-    }
-    //==========must implement===========
-    //==========option implement===========
-    public int getMenuLayout(){return 0;}
+
+
     public void initViews(Bundle savedInstanceState) {
 
     }
@@ -87,7 +87,7 @@ public class BaseActivity extends ActionBarActivity {
             _control.regist(this);
         }
     }
-    //==========must implement===========
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         return super.onKeyDown(keyCode, event);

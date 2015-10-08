@@ -174,6 +174,9 @@ public class WebSiteListFragment extends BaseListFragment
     @Override
     public void onDestroy() {
         Log.d(TAG,"=================destroy======================================");
+        if(WebSiteController.getInst().getQ()!=null) {
+            WebSiteController.getInst().getQ().cancelAll("websiteimage");
+        }
         super.onDestroy();
         RefWatcher watcher = LuanApplication.getLeak(this.getActivity());
         watcher.watch(this);

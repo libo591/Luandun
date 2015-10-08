@@ -34,8 +34,12 @@ public class AppConfig {
 
 
     public void setContext(Context context){
-        mContext = context;
-        typeFace = Typeface.createFromAsset(mContext.getAssets(), "iconfont/iconfont.ttf");
+        if(context!=null) {
+            mContext = context;
+            if(typeFace==null) {
+                typeFace = Typeface.createFromAsset(mContext.getAssets(), "iconfont/iconfont.ttf");
+            }
+        }
     }
     public Context getContext(){
         return mContext;

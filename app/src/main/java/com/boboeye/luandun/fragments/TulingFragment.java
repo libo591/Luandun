@@ -42,6 +42,13 @@ public class TulingFragment extends BaseListFragment implements SwipeRefreshLayo
     private boolean submiting=false;
     @InjectView(R.id.nothing)
     public RelativeLayout nothing;
+    @InjectView(R.id.tulingitem_input)
+    public EditText input;
+    @InjectView(R.id.tuling_refreshlayout)
+    public SwipeRefreshLayout reqPagelayout;
+    @InjectView(R.id.tulingitem_submit)
+    public TextView submit;
+    private Animation submitAnim;
 
     @Override
     public BaseController getController() {
@@ -113,13 +120,7 @@ public class TulingFragment extends BaseListFragment implements SwipeRefreshLayo
         imm.hideSoftInputFromWindow(input.getWindowToken(),0);
     }
 
-    @InjectView(R.id.tulingitem_input)
-    public EditText input;
-    @InjectView(R.id.tuling_refreshlayout)
-    public SwipeRefreshLayout reqPagelayout;
-    @InjectView(R.id.tulingitem_submit)
-    public TextView submit;
-    private Animation submitAnim;
+
 
     @OnClick(R.id.tulingitem_submit)
     public void submitClick(){

@@ -9,19 +9,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:orientation="horizontal">
             <TextView android:id="@+id/passitem_type_icon" style="@style/passitem_text" />
-            <TextView android:id="@+id/passitem_type" style="@style/passitem_text"/>
+            <TextView android:id="@+id/passitem_type" style="@style/passitem_content"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:orientation="horizontal">
             <TextView android:id="@+id/passitem_name_icon" style="@style/passitem_text" />
-            <TextView android:id="@+id/passitem_name" style="@style/passitem_text"/>
+            <TextView android:id="@+id/passitem_name" style="@style/passitem_content"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:orientation="horizontal">
             <TextView android:id="@+id/passitem_pass_icon" style="@style/passitem_text" />
-            <TextView android:id="@+id/passitem_pass" style="@style/passitem_text"/>
+            <TextView android:id="@+id/passitem_pass" style="@style/passitem_content"/>
         </LinearLayout>
     </LinearLayout>
     <RelativeLayout

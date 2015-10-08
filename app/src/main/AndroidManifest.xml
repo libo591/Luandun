@@ -28,6 +28,12 @@
         </activity>
         <activity
             android:name=".activitys.WebViewActivity"  android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:host="webview" android:scheme="boboeye" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activitys.ProcessActivity"  android:screenOrientation="portrait">

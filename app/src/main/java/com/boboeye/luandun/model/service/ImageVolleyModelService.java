@@ -5,6 +5,7 @@ import android.support.v4.util.SimpleArrayMap;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -40,6 +41,8 @@ public class ImageVolleyModelService extends VolleyModelService
     public void reqByVolley(String url, List<NameValuePair> pairs, SimpleArrayMap<String, String> heads) {
         super.reqByVolley(url,pairs,heads);
         ImageRequest imageReq = new ImageRequest(url,getResponseLis(),maxWidth,maxHeight,scaleType,Bitmap.Config.ARGB_8888,getResponseErrorLis());
+        imageReq.setTag("websiteimage");
+        imageReq.setRetryPolicy(new DefaultRetryPolicy(1000,0,2f));
         mQueue.add(imageReq);
     }
 

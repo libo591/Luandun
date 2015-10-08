@@ -21,16 +21,16 @@ public class LuanApplication extends BaseApplication{
         super.onCreate();
         //BaseUncaughtExceptionHandler baseun = new BaseUncaughtExceptionHandler();
         //Thread.setDefaultUncaughtExceptionHandler(baseun);
-        watcher = LeakCanary.install(this);
-        //watcher = RefWatcher.DISABLED;
+        //watcher = LeakCanary.install(this);
+        watcher = RefWatcher.DISABLED;
         long totleMem = Runtime.getRuntime().totalMemory();
         Log.d(TAG, "应用总内存:" + totleMem / 1024 + "K");
     }
 
     public static RefWatcher getLeak(Context context){
         LuanApplication app = (LuanApplication) context.getApplicationContext();
-        return app.watcher;
-        //return RefWatcher.DISABLED;
+        //return app.watcher;
+        return RefWatcher.DISABLED;
     }
 
 }
